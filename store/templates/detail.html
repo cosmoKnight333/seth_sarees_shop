@@ -70,18 +70,16 @@
                 <div class="d-flex pt-2">
                     <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
                     <div class="d-inline-flex">
-                        <a class="text-dark px-2" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a class="text-dark px-2" href="whatsapp://send?text=Check out this awesome product {{ product_obj.name }} on {{ request.build_absolute_uri }}">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a class="text-dark px-2" href="tg://msg?text=Check out this awesome product {{ product_obj.name }} on {{ request.build_absolute_uri }}">
-                            <i class="fab fa-telegram"  ></i>
-                        </a>
-                        <div id="share-container">
-                            <button class="btn btn-transparent m-0 p-0 text-dark" id="share-button" onclick="share()"> <i class="fas fa-share" class="instagram-button"" ></i></button>
-                        </div>
+                        <!-- AddToAny BEGIN -->
+                        <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                            <a class="a2a_dd" href="https://www.addtoany.com/share" target="_blank"></a>
+                            <a class="a2a_button_whatsapp" ></a>
+                            <a class="a2a_button_facebook"></a>
+                            <a class="a2a_button_twitter"></a>
+                            <a class="a2a_button_pinterest"></a>
+                        </div>  
+                        <script async src="https://static.addtoany.com/menu/page.js"></script>
+                        <!-- AddToAny END -->
                     </div>
                 </div>
             </div>
@@ -147,22 +145,6 @@
     </div>
     <!-- Products End here -->
 
-<script>
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-if (isMobile) {
-    document.getElementById("share-container").classList.add("mobile");
-} else {
-    document.getElementById("share-container").classList.add("desktop");
-}
-function share() {
-    navigator.share({
-        title: '{{ product_obj.name }}',
-        text: '{{ request.build_absolute_uri }}',
-    })
-    .then(() => console.log('Successful share'))
-    .catch((error) => console.log('Error sharing', error));
-}
-</script>
 {% endblock content%}
 
 {% block category_nav %}
