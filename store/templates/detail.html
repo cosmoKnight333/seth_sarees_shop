@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <style>
+        #share-container.mobile {
+            display: block;
+        }
+        #share-container.desktop {
+            display: none;
+        }
+    </style>
+
+    <!-- Shop Detail Start -->
+    <div class="container-fluid py-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-5 pb-5">
+                <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner border">
+                        <div class="carousel-item active">
+                            <img style="vertical-align: middle;"  class="w-100 h-100"  src="{{product_obj.image.url}}" alt="Image" >
+                        </div>
+                        <div class="carousel-item">
+                            <img style="vertical-align: middle;" class="w-100 h-100"  src="{{product_obj.image1.url}}" alt="Image" >
+                        </div>
+                        <div class="carousel-item">
+                            <img style="vertical-align: middle;" class="w-100 h-100"  src="{{product_obj.image2.url}}" alt="Image" >
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev " href="#product-carousel" data-slide="prev">
+                        <i class="fa fa-2x fa-angle-left text-dark"  style="color:#000000;"> </i>
+                    </a>
+                    <a class="carousel-control-next" href="#product-carousel" data-slide="next">
+                        <i class="fa fa-2x fa-angle-right text-dark"  style="color:#000000;"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-7 py-5">
+                <h3 class="font-weight-semi-bold">{{product_obj.name}}</h3>
+                <p class="mb-4" class="text-justify">{{product_obj.description}}</p>
+ 
+                <div class="d-flex mb-4">
+                    <p class="text-dark font-weight-medium mb-0 mr-3">Colors Availble:</p>
+                    <form class="container-fluid">
+                        <div class="row w-100 d-flex justify-content-around  ">
+                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#161616"></i>Black</div>
+                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
+                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
+                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
+                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
+                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
+                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
+                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
+                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
+                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
+                           
+                        </div>
+
+                    </form>
+                </div>
+                <div class="d-flex align-items-center mb-4 pt-2">
+                    <a href="https://wa.me/{{phone_no}}?text=Hello,+I+am+interested+in+knowing+more+about+your+product+on+URL:+{{request.build_absolute_uri}} " target="_blank" class="btn btn-outline-primary px-3"><i class="fab fa-whatsapp  mr-1"></i> Inquire On Whatsapp</a>
+                    <form action="/add-to-wishlist" method="POST">
+					    {%csrf_token%}
+                        <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">     
+                        <input type="hidden" name="product" value="{{ product_obj.id }}">     
+                        <button type="submit" class="btn btn-primary px-3 mx-3"><i class="fa fa-heart text-dark mr-1"></i> Add To Wish List</button>
+                    </form>
+                </div>
+                <div class="d-flex pt-2">
+                    <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
+                    <div class="d-inline-flex">
+                        <a class="text-dark px-2" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a class="text-dark px-2" href="whatsapp://send?text=Check out this awesome product {{ product_obj.name }} on {{ request.build_absolute_uri }}">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a class="text-dark px-2" href="tg://msg?text=Check out this awesome product {{ product_obj.name }} on {{ request.build_absolute_uri }}">
+                            <i class="fab fa-telegram"  ></i>
+                        </a>
+                        <div id="share-container">
+                            <button class="btn btn-transparent m-0 p-0 text-dark" id="share-button" onclick="share()"> <i class="fas fa-share" class="instagram-button"" ></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row px-xl-5">
+            <div class="col">
+                <div class="nav nav-tabs justify-content-center border-secondary mb-lg-4">
+                    <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Description</a>
+                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Information</a>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="tab-pane-1">
+                        <h4 class="mb-lg-3 pt-2" >Product Description</h4>
+                        <p class="text-justify">{{product_obj.category.description|linebreaks}}</p>
+                        <p ></p>
+                    </div>
+                    <div class="tab-pane fade" id="tab-pane-2">
+                        <h4 class="mb-lg-3 pt-2">Additional Information</h4>
+                        <p class="text-justify">{{product_obj.description}}</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Shop Detail End -->
+
+
+    <!-- Products Start -->
+    <div class="container-fluid py-5">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">You May Also Like</span></h2>
+        </div>
+        
+        <div class="row px-xl-5">
+            <div class="col">
+                <div class="owl-carousel related-carousel">
+                    {%for product in products%}
+                    <div class="card product-item border-0" style="height:350px">
+                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <a href="/detail?product={{product.id}}" target="_blank"><img class="img-fluid w-100" src="{{product.image.url}}" alt=""></a>
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">{{product.name}}</h6>
+                            <div class="d-flex justify-content-center">
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="/detail?product={{product.id}}" target="_blank" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                            <form action="/add-to-wishlist" method="POST">
+                                {%csrf_token%}
+                                <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">     
+                                <input type="hidden" name="product" value="{{ product.id }}">     
+                                <button type="submit" class="btn btn-sm text-dark p-0"><i class="fa fa-heart text-primary mr-1"></i> Add To Wish List</button>
+                        </form>
+                        </div>
+                    </div>
+                    {%endfor%}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Products End here -->
+
+<script>
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+if (isMobile) {
+    document.getElementById("share-container").classList.add("mobile");
+} else {
+    document.getElementById("share-container").classList.add("desktop");
+}
+function share() {
+    navigator.share({
+        title: '{{ product_obj.name }}',
+        text: '{{ request.build_absolute_uri }}',
+    })
+    .then(() => console.log('Successful share'))
+    .catch((error) => console.log('Error sharing', error));
+}
+</script>
+{% endblock content%}
+
+{% block category_nav %}
+<nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
+                
+{% endblock category_nav %}
