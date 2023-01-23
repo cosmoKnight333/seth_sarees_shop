@@ -37,36 +37,71 @@
 
             <div class="col-lg-7 py-5">
                 <h3 class="font-weight-semi-bold">{{product_obj.name}}</h3>
-                <p class="mb-4" class="text-justify">{{product_obj.description}}</p>
+                <p class="mb-4 text-justify" >{{product_obj.description}}</p>
  
                 <div class="d-flex mb-4">
-                    <p class="text-dark font-weight-medium mb-0 mr-3">Colors Availble:</p>
+                    <p class="text-dark font-weight-medium mb-0 mr-3">Other Options:</p>
                     <form class="container-fluid">
-                        <div class="row w-100 d-flex justify-content-around  ">
-                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#161616"></i>Black</div>
-                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
-                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
-                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
-                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
-                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
-                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
-                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
-                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
-                            <div class="m-1"><i class="fa fa-circle mr-1" style="color:#000000"></i>Black</div>
-                           
+                        <div class="row">
+                            <div class="col-6 col-md-3 ">
+                                <i class="fa fa-circle mr-1" style="color: #8B0000"></i>Maroon
+                            </div>
+                            <div class="col-6 col-md-3 ">
+                                <i class="fa fa-circle mr-1" style="color: #4169E1"></i>Blue
+                            </div>
+                            <div class="col-6 col-md-3 ">
+                                <i class="fa fa-circle mr-1" style="color: #E6E6FA"></i>Lavender
+                            </div>
+                            <div class="col-6 col-md-3 ">
+                                <i class="fa fa-circle mr-1" style="color: #F5F5DC"></i>Beige
+                            </div>
+                            <div class="col-6 col-md-3 ">
+                                <i class="fa fa-circle mr-1" style="color: #008080"></i>Teal
+                            </div>
+                            <div class="col-6 col-md-3 ">
+                                <i class="fa fa-circle mr-1" style="color: #FF7F50"></i>Coral
+                            </div>
+                            <div class="col-6 col-md-3 ">
+                                <i class="fa fa-circle mr-1" style="color: #40E0D0"></i>Turquoise
+                            </div>
+                            <div class="col-6 col-md-3 ">
+                                <i class="fa fa-circle mr-1" style="color: #FFDAB9"></i>Peach
+                            </div>
+                            <div class="col-6 col-md-3 ">
+                                <i class="fa fa-circle mr-1" style="color: #DDA0DD"></i>Plum
+                            </div>
+                            <div class="col-6 col-md-3 ">
+                                <i class="fa fa-circle mr-1" style="color: #FFDB58"></i>Yellow
+                            </div>
+                            <div class="col-6 col-md-3 ">
+                                <i class="fa fa-circle mr-1" style="color: #556B2F"></i>Olive Green
+                            </div>
+                            
+                            <div class="col-6 col-md-3 ">
+                                <i class="fa fa-circle mr-1" style="color: #98FB98"></i>Mint Green
+                            </div>
                         </div>
-
                     </form>
                 </div>
+                
+ 
                 <div class="d-flex align-items-center mb-4 pt-2">
-                    <a href="https://wa.me/{{phone_no}}?text=Hello,+I+am+interested+in+knowing+more+about+your+product+on+URL:+{{request.build_absolute_uri}} " target="_blank" class="btn btn-outline-primary px-3"><i class="fab fa-whatsapp  mr-1"></i> Inquire On Whatsapp</a>
-                    <form action="/add-to-wishlist" method="POST">
-					    {%csrf_token%}
-                        <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">     
-                        <input type="hidden" name="product" value="{{ product_obj.id }}">     
-                        <button type="submit" class="btn btn-primary px-3 mx-3"><i class="fa fa-heart text-dark mr-1"></i> Add To Wish List</button>
+                    <a href="https://wa.me/{{phone_no}}?text=Hello,+I+am+interested+in+knowing+more+about+your+product+on+URL:+{{request.build_absolute_uri}} " target="_blank" class="btn btn-outline-primary  mr-1 px-3 d-flex align-items-center w-lg-25 w-md-15 align-self-center">
+                        <i class="fab fa-whatsapp fa-2x ml-1 text-lg"></i>
+                        <span class="ml-1 text-lg">Inquire On Whatsapp</span>
+                    </a>
+                    <form action="/add-to-wishlist" method="POST" class="w-lg-25 w-md-50 align-self-center">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">
+                        <input type="hidden" name="product" value="{{ product_obj.id }}">
+                        <button type="submit" class="btn btn-primary  ml-1 px-3 d-flex align-items-center w-lg-25 w-md-50 align-self-center">
+                            <i style="color:#444444" class="far fa-heart fa-2x ml-1 text-lg"></i>
+                            <span class="ml-2 text-lg">Add To WishList</span>
+                        </button>
                     </form>
                 </div>
+                
+                
                 <div class="d-flex pt-2">
                     <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
                     <div class="d-inline-flex">
@@ -91,17 +126,16 @@
                     <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Information</a>
                 </div>
                 <div class="tab-content">
-                    <div class="tab-pane fade show active" id="tab-pane-1">
+                    <div class="tab-pane fade show active text-justify" id="tab-pane-1">
                         <h4 class="mb-lg-3 pt-2" >Product Description</h4>
-                        <p class="text-justify">{{product_obj.category.description|linebreaks}}</p>
-                        <p ></p>
+                        <p>{{product_obj.category.description|linebreaks}}</p>
                     </div>
-                    <div class="tab-pane fade" id="tab-pane-2">
+                    <div class="tab-pane fade text-justify" id="tab-pane-2">
                         <h4 class="mb-lg-3 pt-2">Additional Information</h4>
-                        <p class="text-justify">{{product_obj.description}}</p>
+                        <p>{{product_obj.description}}</p>
                     </div>
-                    
                 </div>
+                
             </div>
         </div>
     </div>

@@ -41,15 +41,15 @@
 <body>
     <!-- Topbar Start -->
     <div class="container-fluid">
-        <div class="row bg-secondary py-2 px-xl-5">
-            <div class="col-lg-6 d-none d-lg-block">
+        <div class="row bg-secondary py-2 px-xl-5 justify-content-between">
+            <div class="col-6">
                 <div class="d-inline-flex align-items-center">
                     <a class="text-dark" target="_blank" href="https://wa.me/{{phone_no}}?text=Hello,+I+needed+some+help+related+to+your+store">Help</a>
                     <span class="text-muted px-2">|</span>
-                    <a class="text-dark" target="_blank" href="https://wa.me/{{phone_no}}?text=Hello,+I+needed+some+support+related+to+your+store">Support</a>
+                    <a class="text-dark" target="_blank" href="/support">Support</a>
                 </div>
             </div>
-            <div class="col-lg-6 text-center text-lg-right">
+            <div class="col-6 d-flex justify-content-end">
                 <div class="d-inline-flex align-items-center">
                     <a class="text-dark px-2" href="https://www.facebook.com/profile.php?id=100089091092224" target="_blank">
                         <i class="fab fa-facebook-f"></i>
@@ -66,6 +66,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a href='/' class="text-decoration-none">
@@ -289,12 +290,7 @@
                                 <p class="help-block text-danger"></p>
                                   
                             </div>
-                            <div class="control-group text-center m   align-items-center justify-content-center">
-
-                               <a  href="https://wa.me/14155238886?text=join+riding-world" target="_blank" class="btn text-center w-75 btn-outline-primary px-3">verify Its You</a>
-                                <small style="display:block">Send us the generated code on whatsApp to verify you are you.</small>
-                            </div>
-
+                       
                               <div class="control-group">
                                   <input type="password" class="form-control m-2 p-3" name="password" placeholder="Password"
                                       required="required" data-validation-required-message="Please enter a Password" />
@@ -377,11 +373,7 @@
                                     <p class="help-block text-danger"></p>
                                       
                                 </div>
-                                <div class="control-group text-center m   align-items-center justify-content-center">
-    
-                                   <a  href="https://wa.me/14155238886?text=join+riding-world" target="_blank" class="btn text-center w-75 btn-outline-primary px-3">verify Its You</a>
-                                    <small style="display:block">Send us the generated code on whatsApp to verify you are you.</small>
-                                </div>
+
                          
             </div>
             <div class="modal-footer">
@@ -396,8 +388,34 @@
     
       
     <!-- change info end -->
+    <!-- is_in_wishlist start -->
 
-
+    <div class="modal fade" id="itemAlreadyInWishlistModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Item already in your wishlist!</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>It looks like this item is already in your wishlist. No worries though, you can easily remove it if you'd like.</p>
+            </div>
+            <div class="modal-footer">
+                <form action="/remove-item" method="POST">
+                    {%csrf_token%}
+                        <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">     
+                        <input type="hidden" name="product" value="{{ request.GET.is_in_wishlist }}">     
+                        <button type="submit" method="POST" class="btn  btn-primary">Remove from Wishlist</button>
+                    </form>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- is_in_wishlist info end -->
+      
 
         {%block content%}
 
@@ -426,7 +444,7 @@
                             <a class="text-dark mb-2" href="/category"><i class="fa fa-angle-right mr-2"></i>Our Sarees</a>
                             <a class="text-dark mb-2" href="/wishlist"><i class="fa fa-angle-right mr-2"></i>Wish list</a>
                             <a class="text-dark mb-2" href="/contact"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                            <a class="text-dark mb-2" target="_blank" href="https://www.google.com/search?q=seth%20sarees&oq=seth+sarees&aqs=chrome..69i57j69i59j69i61l3.2280j0j4&sourceid=chrome&ie=UTF-8&tbs=lrf:!1m4!1u3!2m2!3m1!1e1!2m1!1e3!3sIAE,lf:1,lf_ui:10&tbm=lcl&sxsrf=ALiCzsb6kLBLebcYjMVq3ZZjTXegQRwJRQ:1671576707763&rflfq=1&num=10&rldimm=527673046138865702&lqi=CgtzZXRoIHNhcmVlc0iz8qLwsq6AgAhaHRAAEAEYABgBIgtzZXRoIHNhcmVlcyoGCAIQABABkgEXZGVzaWduZXJfY2xvdGhpbmdfc3RvcmU&phdesc=J3chXqvknqQ&ved=2ahUKEwjQ5oW_pIn8AhVywXMBHfXHBNoQvS56BAgeEAE&sa=X&rlst=f#lrd=0x398e2e1ed9ad1ce9:0x752abd6f8a7c826,3,,,&rlfi=hd:;si:527673046138865702,l,CgtzZXRoIHNhcmVlc0iz8qLwsq6AgAhaHRAAEAEYABgBIgtzZXRoIHNhcmVlcyoGCAIQABABkgEXZGVzaWduZXJfY2xvdGhpbmdfc3RvcmU,y,J3chXqvknqQ;mv:[[25.6592943,83.033485],[25.2677299,82.87100439999999]];tbs:lrf:!1m4!1u3!2m2!3m1!1e1!2m1!1e3!3sIAE,lf:1,lf_ui:10"><i class="fa fa-angle-right mr-2"></i>Rate Us on Google</a>
+                            <a class="text-dark mb-2" target="_blank" href="/support"><i class="fa fa-angle-right mr-2"></i>Support</a>
 
                         </div>
                     </div>
@@ -481,8 +499,9 @@
         
     </footer>
     <!-- Footer End -->
+    {% if  not request.GET.signup_error_msg%}
     <button   class="btn btn-primary sticky-btn" onclick="window.location.href='tel:+{{phone_no}}'">Call-Us <span class="pl-1"><i class="fa fa-phone" ></i></span></button>
-
+    {%endif%}
 
     <!-- Back to Top -->
 
@@ -516,6 +535,13 @@
     </script>
     {% endif %}
 
+    {% if request.GET.is_in_wishlist  %}
+    <script>
+        $(document).ready(function() {
+            $('#itemAlreadyInWishlistModal').modal('show');
+        });
+    </script>
+    {% endif %}
 
     {% if request.GET.error_msg  %}
     <script>

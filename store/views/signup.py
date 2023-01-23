@@ -6,7 +6,7 @@ from store.models.customer import Customer
 from urllib.parse import urlencode, urlparse
 from urllib.parse import  parse_qs
 import urllib
-import secrets
+import random
 import json
 import re
 from django.core.mail import EmailMultiAlternatives
@@ -26,6 +26,7 @@ def email_exists(email):
 #     except Exception as e:
 #         print(e)  
 #         return False
+    
 def modify_url(url, param, value):
     parsed_url = urlparse(url)
     query_dict = parse_qs(parsed_url.query)
@@ -46,7 +47,7 @@ class Signup(View):
         phone_number=postData.get('phone_number')
         email=postData.get('email')
         password=postData.get('password')
-        verification_token=secrets.token_hex(7)
+        verification_token=random.randint(100000, 999999)
         error_msg=None
         signup_error_msg=''
         url=modify_url(url,'error_msg','')

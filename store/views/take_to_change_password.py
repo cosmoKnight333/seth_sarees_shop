@@ -13,16 +13,9 @@ from django.core.mail import EmailMessage
 from django.core.mail import EmailMultiAlternatives
 import os
 import urllib
-from django.core.mail import send_mail
-from django.template.loader import render_to_string
 
 
-def send_otp_email(user_email, otp):
-    subject = 'Password Reset OTP'
-    message = render_to_string('otp_email.html', {'otp': otp})
-    send_mail(subject, '', 'sethsarees@gmail.com', [user_email], html_message=message)
 
- 
 def modify_url(url, param, value):
     # Parse the URL and retrieve the query string
     parsed_url = urlparse(url)
@@ -49,30 +42,20 @@ def hide_email(email):
     hidden_email = email_name + "@" + email_domain
     return hidden_email
 
-class Forgot_Password(View):
-    def get(self, request):
-        data = initial_data
-        email=request.GET.get('email')
-        data['customer_email']=email
-        return render(request, 'forgot_password.html', data)
-
+class Take_To_Change_Password(View):
     def post(self, request):
         data = initial_data
         email = request.POST.get('customer_email')
-        customer = Customer.get_customer_by_email(email) or Customer.get_customer_by_phone_number(email)
-        is_error=''
-        if customer:
-            url='/forgot-password'
-            url=modify_url(url,'hidden_email',hide_email(customer.email))
-            url=modify_url(url,'email',email)
-            customer_id=customer.id
-            link =str(request.build_absolute_uri('/'))
-            link=link+'change_password?customer_id='+str(customer.id)+'&customer_verification_token='+customer.verification_token            
-            phone_number='+'+customer.country_code+customer.phone_number
-            url=modify_url(url,'customer_id',customer.id)
-            send_otp_email(customer.email,customer.verification_token)
-            return redirect(modify_url(url,'forgot_password_is_error','Success'))
+        customer_id = request.POST.get('customer_id')
+        otp = request.POST.get('otp')
+        customer = Customer.objects.get(id=request.POST.get('customer_id'))
+        print(type(otp),type(customer.verification_token))
+        if customer.verification_token==otp:
+            url='/change_password?customer_id='+str(customer.id)+'&customer_verification_token'+customer.verification_token
+            return redirect(url)
         else:
             url='/forgot-password'
             url=modify_url(url,'email',email)
-            return redirect(modify_url(url,'forgot_password_is_error','Error'))
+            url=modify_url(url,'customer_id',customer.id)
+            url=modify_url(url,'hidden_email',hide_email(customer.email))
+            return redirect(modify_url(url,'wrong_otp_error','Error'))

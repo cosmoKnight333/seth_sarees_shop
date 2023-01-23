@@ -7,6 +7,7 @@ from .models.customer import Customer
 from .models.contact import Contact
 from .models.review import Review
 from .models.wishlist import Wishlist
+from .models.faqs import Faqs
 
 # Register your models here.
 
@@ -20,6 +21,8 @@ class AdminCorousel(admin.ModelAdmin):
 
 class AdminCategory(admin.ModelAdmin):
     list_display = ['name']
+class AdminFaws(admin.ModelAdmin):
+    list_display = ['question']
     
 class AdminProduct(admin.ModelAdmin):
     list_display = ['name']
@@ -39,4 +42,5 @@ admin.site.register(Customer)
 admin.site.register(Contact)
 admin.site.register(Review)
 admin.site.register(Wishlist)
+admin.site.register(Faqs)
 

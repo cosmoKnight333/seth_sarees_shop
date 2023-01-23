@@ -10,7 +10,7 @@ from django.http import HttpResponse
 from django.core.mail import EmailMessage
 from django.urls import reverse
 from django.core.mail import EmailMessage
-import secrets
+import random
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.hashers import make_password
 
@@ -31,12 +31,9 @@ def modify_url(url, param, value):
 class Change_Password(View):
     def get(self, request):
         data = initial_data
-        customer_id = request.GET.get('customer_id')
+        customer_id = int(request.GET.get('customer_id'))
         customer_verification_token = request.GET.get('customer_verification_token')
-        try:
-            customer = Customer.objects.get(id=int(customer_id), verification_token=customer_verification_token)
-        except ObjectDoesNotExist:
-            customer = None
+        customer = Customer.objects.get(id=customer_id)
         if customer:
             data['customer_id']=customer.id
             data['customer_verification_token']=customer.verification_token
@@ -46,16 +43,13 @@ class Change_Password(View):
             url='/forgot-password'
             return redirect(modify_url(url,'forgot_password_is_error','Error'))        
         
-        
     def post(self, request):
         data = initial_data
-
         customer = Customer.objects.get(id=request.POST.get('customer_id'))
         if customer.verification_token ==request.POST.get('customer_verification_token'):
             customer.password=request.POST.get('password')
             customer.password=make_password(customer.password)
-            
-            verification_token=secrets.token_hex(7)
+            verification_token=random.randint(100000, 999999)
             customer.verification_token=verification_token
             customer.save()
             request.session['customer'] = customer.id

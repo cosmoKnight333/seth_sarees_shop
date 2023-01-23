@@ -2,34 +2,28 @@
 {% load static %}
 {% block content %}
 <style>
-    .add-to-cart-btn {
-        transition: all 0.2s ease-in-out;
-      }
-    .add-to-cart-btn-clicked {
-        transform: scale(1.15);
+    .fa-2x {
+        font-size: 2em;
     }
 </style>
-    <!-- Page Header Start -->
-    <div class="container-fluid bg-secondary mb-5" style="padding-top:31px;padding-bottom:30px">
-        <div class="d-flex flex-column justify-content-center align-items-center  text-center" style="min-height: 300px">
-            <h2 data-aos="fade-up" class="font-weight-semi-bold  mb-3">
-                {%if not query%}
-                 Our Aesthetic Collection
-                {%endif%}
-                {{query}}
-                
-            </h2>
-            <div class="d-inline-flex">
-                <p class="m-0"><a href="/">Home</a></p>
-                <p class="m-0 px-2">-</p>
-                <p class="m-0"><a href="/category">Shop</a></p>
-            </div>
+  <!-- Page Header Start -->
+  <div class="container-fluid bg-secondary mb-5" style="padding-top:31px;padding-bottom:30px">
+    <div class="d-flex flex-column justify-content-center align-items-center  text-center" style="min-height: 300px">
+        <h2 data-aos="fade-up" class="font-weight-semi-bold  mb-3">
+            {%if not query%}
+             Our Aesthetic Collection
+            {%endif%}
+            {{query}}
+            
+        </h2>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="/">Home</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0"><a href="/category">Shop</a></p>
         </div>
     </div>
-    <!-- Page Header End -->
-
-
-<!-- Shop Start -->
+</div>
+<!-- Page Header End -->
 <!-- Shop Start -->
 <div class="container-fluid pt-5">
     <div class="row px-xl-5">
@@ -54,8 +48,8 @@
                                 {%csrf_token%}
                                 <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">     
                                 <input type="hidden" name="product" value="{{ product.id }}">     
-                                <button type="submit" class="btn btn-sm text-dark add-to-cart-btn p-0">
-                                    <i class="fa fa-heart text-primary mr-1"></i> Add To Wish List
+                                <button type="submit" class="btn btn-sm text-dark add-to-cart-btn p-0" id="wishlist-btn-{{product.id}}">
+                                    <i class="fa fa-heart text-primary mr-1" id="heart-icon-{{product.id}}"></i> Add To Wish List
                                 </button>
                             </form>   
                         </div>
@@ -67,15 +61,13 @@
     </div>
 </div>
 <!-- Shop End -->
-
-<!-- Shop End -->
 <script>
-    var addToCartBtn = document.querySelector('.add-to-cart-btn');
-addToCartBtn.addEventListener('click', function() {
-  addToCartBtn.classList.toggle('add-to-cart-btn-clicked');
+    {% for product in products %}
+    document.getElementById("wishlist-btn-{{product.id}}").addEventListener("click", function(){
+    document.getElementById("heart-icon-{{product.id}}").classList.toggle("fa-2x");
 });
+    {% endfor %}
 </script>
-
 {% endblock content%}
 
 {% block category_nav %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block category_nav %}
+
+<nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
+{% endblock category_nav %}
+{% block content %}
+
+<div class="container">
+    <div class="container">
+        <h1 class="text-center">Welcome to our Support page!</h1>
+        <p>We're here to help you find the perfect saree for your occasion. You can schedule a video call with one of our reps through our website, visit our store in person or create a wishlist on our website to find the perfect sarees. If you need assistance, you can call us and one of our reps will be happy to help you out.</p>
+        <p>Our store also provides a custom color and border feature for our sarees.</p>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="accordion" id="faqAccordion">
+          <!-- FAQ accordion content goes here -->
+          <div class="accordion" id="faqAccordion">
+            {% for faq in faqs %}
+            <div class="card">
+              <div class="card-header" id="heading{{forloop.counter}}">
+                <h5 class="mb-0">
+                  <button class="btn btn-link {% if forloop.first %}show active{% endif %}" type="button" data-toggle="collapse" data-target="#collapse{{forloop.counter}}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="collapse{{forloop.counter}}" >
+                   <b> Q: {{faq.question}}</b>
+                  </button>
+                </h5>
+              </div>
+              <div id="collapse{{forloop.counter}}" class="collapse {% if forloop.first %}show{% endif %}" aria-labelledby="heading{{forloop.counter}}" data-parent="#faqAccordion">
+                <div class="card-body">
+                  A: {{faq.answer}}
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            <!-- Add additional accordion items as needed -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

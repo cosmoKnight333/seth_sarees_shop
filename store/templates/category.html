@@ -2,11 +2,8 @@
 {% load static %}
 {% block content %}
 <style>
-    .add-to-cart-btn {
-        transition: all 0.2s ease-in-out;
-      }
-    .add-to-cart-btn-clicked {
-        transform: scale(1.15);
+    .fa-2x {
+        font-size: 2em;
     }
 </style>
     <!-- Page Header Start -->
@@ -54,8 +51,8 @@
                                 {%csrf_token%}
                                 <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">     
                                 <input type="hidden" name="product" value="{{ product.id }}">     
-                                <button type="submit" class="btn btn-sm text-dark add-to-cart-btn p-0">
-                                    <i class="fa fa-heart text-primary mr-1"></i> Add To Wish List
+                                <button type="submit" class="btn btn-sm text-dark add-to-cart-btn p-0" id="wishlist-btn-{{product.id}}">
+                                    <i class="fa fa-heart text-primary mr-1" id="heart-icon-{{product.id}}"></i> Add To Wish List
                                 </button>
                             </form>   
                         </div>
@@ -68,10 +65,11 @@
 </div>
 <!-- Shop End -->
 <script>
-    var addToCartBtn = document.querySelector('.add-to-cart-btn');
-addToCartBtn.addEventListener('click', function() {
-  addToCartBtn.classList.toggle('add-to-cart-btn-clicked');
+    {% for product in products %}
+    document.getElementById("wishlist-btn-{{product.id}}").addEventListener("click", function(){
+    document.getElementById("heart-icon-{{product.id}}").classList.toggle("fa-2x");
 });
+    {% endfor %}
 </script>
 {% endblock content%}
 
