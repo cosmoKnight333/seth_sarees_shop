@@ -5,7 +5,7 @@
     <!-- Page Header Start -->
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-            <h2 class="font-weight-semi-bold  mb-3">Your Wish List</h2>
+            <h2 class="font-weight-semi-bold  mb-3">Your Wishlist</h2>
             <div class="d-flex flex-column text-center align-items-center justify-content-center ">
                 <p class="m-0 mb-2"><a href="/category">Explore Our Range</a></p>
                 
@@ -35,11 +35,13 @@
                         <tr>
                             <td class=""><a href="/detail?product={{entry.product.id}}"><img src="{{entry.product.image.url}}" alt="" style="width: 100px;border-radius: 10%;"  class="m-2"></a> </td>
                             <td class="text-center pt-5" style="vertical-align: middle;"><a href="/detail?product={{entry.product.id}}"> <a href="/detail?product={{entry.product.id}}"><p> {{entry.product.name}}</p></a></td>
-                            <td class="align-middle"><form action="/remove-item" method="POST">
+                            <td class="align-middle">
+                                <form action="/remove-item" method="POST">
                                 {%csrf_token%}
-                                <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">     
-                                <input type="hidden" name="product" value="{{ entry.product.id }}">     
-                                <button type="submit" method="POST" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></form>
+                                    <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">     
+                                    <input type="hidden" name="product" value="{{ entry.product.id }}">     
+                                    <button type="submit" method="POST" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button>
+                                </form>
                             </td>
                         </tr>
                        

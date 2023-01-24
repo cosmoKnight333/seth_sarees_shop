@@ -1,14 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <style>
-        #share-container.mobile {
-            display: block;
-        }
-        #share-container.desktop {
-            display: none;
-        }
-    </style>
+<style>
+    .fa-2x {
+        font-size: 2em;
+    }
+</style>
 
     <!-- Shop Detail Start -->
     <div class="container-fluid py-5">
@@ -167,8 +164,10 @@
                                 {%csrf_token%}
                                 <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">     
                                 <input type="hidden" name="product" value="{{ product.id }}">     
-                                <button type="submit" class="btn btn-sm text-dark p-0"><i class="fa fa-heart text-primary mr-1"></i> Add To Wish List</button>
-                        </form>
+                                <button type="submit" class="btn btn-sm text-dark add-to-cart-btn p-0 wishlist-btn" >
+                                    <i class="fa fa-heart text-primary mr-1 heart-icon"></i> Add To Wishlist
+                                </button>       
+                            </form>
                         </div>
                     </div>
                     {%endfor%}
@@ -178,7 +177,13 @@
         </div>
     </div>
     <!-- Products End here -->
-
+    <script>
+        document.querySelectorAll(".wishlist-btn").forEach(function(btn) {
+            btn.addEventListener("click", function(){
+                this.querySelector(".heart-icon").classList.toggle("fa-2x");
+            });
+        });
+    </script>
 {% endblock content%}
 
 {% block category_nav %}

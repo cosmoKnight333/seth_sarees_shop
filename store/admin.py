@@ -34,6 +34,9 @@ class AdminCustomer(admin.ModelAdmin):
 class AdminBanarasPhoto(admin.ModelAdmin):
     list_display = ['name']
 
+class AdminContact(admin.ModelAdmin):
+    list_display = ['subject']
+    
 admin.site.register(Product,AdminProduct)
 admin.site.register(Category,AdminCategory)
 admin.site.register(Corousel,AdminCorousel)

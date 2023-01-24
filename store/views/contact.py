@@ -4,7 +4,7 @@ from store.models.customer import Customer
 from store.models.contact import Contact
 from store.models.wishlist import Wishlist
 from .data import initial_data
-
+from datetime import datetime
 class Contact_Page(View):
     def get(self, request):
         data = initial_data
@@ -25,10 +25,12 @@ class Contact_Page(View):
         whatsapp_number = request.POST.get('whatsapp_number')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
+        date_time = datetime.now()
         Contact.objects.create(
             name=name,
             whatsapp_number=whatsapp_number,
             subject=subject,
             message=message,
+            date_time = date_time,
         )
-        return redirect('homepage')
+        return redirect('/contact?success_msg=Your message has been successfully sent')

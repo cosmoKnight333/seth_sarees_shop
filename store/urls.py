@@ -4,6 +4,7 @@ from .views.category import show_category
 from .views.search import search
 from .views.about import show_about
 from .views.support import show_support
+from .views.privacy_policy import show_privacy_policy
 from .views.contact import Contact_Page
 from .views.forgot_password import Forgot_Password
 from .views.change_password import Change_Password
@@ -32,6 +33,7 @@ urlpatterns = [
     path('take-to-change-password',Take_To_Change_Password.as_view()),
     path('about',show_about),
     path('support',show_support),
+    path('privacy_policy',show_privacy_policy),
     path('detail',Detail.as_view(),name="detail"),
     path('login',Login.as_view(),name='login'),
     path('signup',Signup.as_view(),name='signup'),

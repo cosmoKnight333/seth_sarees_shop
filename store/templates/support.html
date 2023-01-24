@@ -9,8 +9,8 @@
 <div class="container">
     <div class="container">
         <h1 class="text-center">Welcome to our Support page!</h1>
-        <p>We're here to help you find the perfect saree for your occasion. You can schedule a video call with one of our reps through our website, visit our store in person or create a wishlist on our website to find the perfect sarees. If you need assistance, you can call us and one of our reps will be happy to help you out.</p>
-        <p>Our store also provides a custom color and border feature for our sarees.</p>
+        <p class="text-justify">We're here to help you find the perfect saree for your occasion. You can schedule a video call with one of our reps through our website, visit our store in person or create a wishlist on our website to find the perfect sarees. If you need assistance, you can call us and one of our reps will be happy to help you out.</p>
+        <p class="text-justify">Our store also provides a custom color and border feature for our sarees.</p>
     </div>
     <div class="row">
       <div class="col-12">
@@ -27,8 +27,8 @@
                 </h5>
               </div>
               <div id="collapse{{forloop.counter}}" class="collapse {% if forloop.first %}show{% endif %}" aria-labelledby="heading{{forloop.counter}}" data-parent="#faqAccordion">
-                <div class="card-body">
-                  A: {{faq.answer}}
+                <div class="card-body text-justify">
+                  A: {{faq.answer|safe}}
                 </div>
               </div>
             </div>
