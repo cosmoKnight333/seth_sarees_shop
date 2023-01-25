@@ -1,17 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from store.models.customer import Customer
-from store.models.contact import Contact
-from store.models.wishlist import Wishlist
 from .data import initial_data
 from urllib.parse import urlencode, urlparse
 from urllib.parse import  parse_qs
-from django.http import HttpResponse
-from django.core.mail import EmailMessage
-from django.urls import reverse
-from django.core.mail import EmailMessage
 import random
-from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.hashers import make_password
 
 def modify_url(url, param, value):
@@ -38,6 +31,10 @@ class Change_Password(View):
             data['customer_id']=customer.id
             data['customer_verification_token']=customer.verification_token
             data['customer_name']=customer.first_name
+            data['title']='Change Password - Secure Your Account'
+            data['meta_description']='Ensure the security of your account by updating your password. Our change password page is for verified users to easily update their password for added protection.'
+            data['meta_tags']='Change password, secure account, verified user, password'
+           
             return render(request, 'change_password.html', data)
         else:
             url='/forgot-password'

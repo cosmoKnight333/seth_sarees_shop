@@ -1,7 +1,5 @@
 
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from django.views import View
+from django.shortcuts import render
 from store.models.product import Product
 from store.models.category import Category
 from store.models.customer import Customer
@@ -24,9 +22,15 @@ def show_category(request):
         data['products'] = Product.get_all_products_by_categoryid(category_id)
         category_obj=Category.objects.get(pk=category_id)
         data['category_obj'] = category_obj
-        data['title']="Saree Category - "+category_obj.name+"- Browse by Fabric, Occasion, or Style"
+        data['title']=category_obj.meta_title
+        data['meta_description']=category_obj.meta_description
+        data['meta_tags']=category_obj.meta_tags
+        
+        
     else:
         data['title']="Saree Collection - Explore Our Extensive Range of Luxurious Silk and Banarasi Sarees - Wholesale and Retail"
+        data['meta_description']='Discover a wide range of luxurious and unique Silk and Banarasi Sarees in Varanasi at wholesale and retail prices. Visit our showroom or shop online now.'
+        data['meta_tags']='Banarasi Sarees, Silk Sarees, Varanasi, Wholesale, Retail,Silk,Saree'
         data['products'] = Product.get_all_products()
         data['categories'] = Category.get_all_categories()
     

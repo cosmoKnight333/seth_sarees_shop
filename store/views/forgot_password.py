@@ -1,18 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from store.models.customer import Customer
-from store.models.contact import Contact
-from store.models.wishlist import Wishlist
 from .data import initial_data
 from urllib.parse import urlencode, urlparse 
 from urllib.parse import  parse_qs
-from django.http import HttpResponse
-from django.core.mail import EmailMessage
-from django.urls import reverse
-from django.core.mail import EmailMessage
-from django.core.mail import EmailMultiAlternatives
-import os
-import urllib
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
@@ -54,6 +45,9 @@ class Forgot_Password(View):
         data = initial_data
         email=request.GET.get('email')
         data['customer_email']=email
+        data['meta_tags']='Forgot password, reset account, email, phone number, OTP'
+        data['meta_description']='Forgot your password? No problem. Enter your email or phone number and we will send you an OTP to verify your identity and reset your account.'
+        data['title']='Forgot Password - Reset Your Account'
         return render(request, 'forgot_password.html', data)
 
     def post(self, request):

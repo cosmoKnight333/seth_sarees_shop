@@ -11,7 +11,14 @@ class Product(models.Model):
     image = models.ImageField(upload_to='uploads/products/')
     image1 = models.ImageField(upload_to='uploads/products/')
     image2 = models.ImageField(upload_to='uploads/products/')
-    
+    alt_text1 = models.CharField(max_length=100, default='', null=True, blank=True)
+    alt_text2 = models.CharField(max_length=100, default='', null=True, blank=True)
+    alt_text3 = models.CharField(max_length=100, default='', null=True, blank=True)
+    meta_title = models.CharField(max_length=255, default='', null=True, blank=True) 
+    meta_tags = models.CharField(max_length=255, default='', null=True, blank=True) 
+    meta_description = models.TextField(default='', null=True, blank=True) 
+    def __str__(self):
+        return self.name 
     @staticmethod
     def get_all_products():
         return Product.objects.all()
@@ -36,5 +43,3 @@ class Product(models.Model):
         else:
             Product.objects.all()
 
-    def __str__(self):
-        return self.name 

@@ -1,13 +1,11 @@
 import smtplib
-from django.shortcuts import render,redirect
+from django.shortcuts import redirect
 from django.contrib.auth.hashers import make_password
 from django.views import View
 from store.models.customer import Customer
 from urllib.parse import urlencode, urlparse
 from urllib.parse import  parse_qs
-import urllib
 import random
-import json
 import re
 from django.core.mail import EmailMultiAlternatives
 def email_exists(email):

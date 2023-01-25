@@ -100,7 +100,7 @@
                     {% comment %} no of products with given category {% endcomment %}
                     
                     <a href="/category?category={{category.id}}" class="cat-img position-relative overflow-hidden mb-3">
-                        <img class="img-fluid ratio ratio-21x9"  src="{{category.image.url}}" alt="">
+                        <img class="img-fluid ratio ratio-21x9"  src="{{category.image.url}}" alt="{{category.alt_text}}">
                     </a>
                     <h5 class="font-weight-semi-bold m-0">{{category.name}}</h5>
                 </div>

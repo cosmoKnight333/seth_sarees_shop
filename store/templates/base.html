@@ -2,7 +2,17 @@
 <html lang="en">
     {% load static %}
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>{{title}}</title>
+        <!-- OG Tag -->
+        <meta property="og:url" content="{{ request.get_host }}">
+        <meta property="og:title" content="{{title}}">
+        <meta property="og:description" content="{{meta_description}}">
+        <meta property="og:image" content="">
+        <meta property="og:type" content="website">
+        <!-- OG Tag END -->
+
     <title>
         {%if title%}
         {{title}}
@@ -11,9 +21,8 @@
         {%endif%}
     </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-   
-    <meta name="description" content="Discover a wide range of luxurious and unique Silk and Banarasi Sarees in Varanasi at wholesale and retail prices. Visit our showroom or shop online now.">
-    <meta name="keywords" content="Banarasi Sarees, Silk Sarees, Varanasi, Wholesale, Retail,Silk,Saree">
+    <meta name="description" content="{{meta_description}}">
+    <meta name="keywords" content="{{meta_tags}}">
    
     <!-- Favicon -->
     <!-- <link href="apple-touch-icon.png" rel="icon"> -->

@@ -17,6 +17,8 @@ class Contact_Page(View):
         error_msg=None
         error_msg = request.GET.get('error_msg')
         data['error_msg'] = error_msg
+        data['meta_description']='At our store, we eagerly await the opportunity to hear from our esteemed customers. If you have any inquiries, comments, or concerns, please do not hesitate to contact us. Our team is available around the clock to promptly respond to your message. We are grateful for your patronage and look forward to assisting you in any way possible.'
+        data['meta_tags']='Contact, inquiries, comments, concerns, customer service, patronage'
         data['title']="Contact Us - Visit Our Showroom or Get in Touch for Wholesale and Retail Orders and Styling Advice"
         return render(request, 'contact.html', data)
 

@@ -1,18 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import  redirect
 from django.views import View
 from store.models.customer import Customer
-from store.models.contact import Contact
-from store.models.wishlist import Wishlist
 from .data import initial_data
 from urllib.parse import urlencode, urlparse 
 from urllib.parse import  parse_qs
-from django.http import HttpResponse
-from django.core.mail import EmailMessage
-from django.urls import reverse
-from django.core.mail import EmailMessage
-from django.core.mail import EmailMultiAlternatives
-import os
-import urllib
 
 
 

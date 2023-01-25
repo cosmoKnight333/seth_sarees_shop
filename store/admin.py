@@ -12,15 +12,16 @@ from .models.faqs import Faqs
 # Register your models here.
 
 class AdminProduct(admin.ModelAdmin):
-    list_display = ['name','price','category',]
+    list_display = ['name','meta_tags','meta_description']
 
 class AdminCorousel(admin.ModelAdmin):
     list_display = ['name','heading','subheading']
-
+class AdminWishlist(admin.ModelAdmin):
+    list_display = ['customer','product']
 
 
 class AdminCategory(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['name','meta_tags','meta_title','alt_text']
 class AdminFaws(admin.ModelAdmin):
     list_display = ['question']
     
@@ -29,21 +30,24 @@ class AdminProduct(admin.ModelAdmin):
 
 
 class AdminCustomer(admin.ModelAdmin):
-    list_display = ['email']
+    list_display = ['first_name','last_name','phone_number','email']
 
 class AdminBanarasPhoto(admin.ModelAdmin):
     list_display = ['name']
 
 class AdminContact(admin.ModelAdmin):
-    list_display = ['subject']
+    list_display = ['name','subject','message']
+
+class AdminReview(admin.ModelAdmin):
+    list_display = ['name']
     
 admin.site.register(Product,AdminProduct)
 admin.site.register(Category,AdminCategory)
 admin.site.register(Corousel,AdminCorousel)
 admin.site.register(BanarasPhoto,AdminBanarasPhoto)
-admin.site.register(Customer)
-admin.site.register(Contact)
+admin.site.register(Customer,AdminCustomer)
+admin.site.register(Contact,AdminContact)
 admin.site.register(Review)
-admin.site.register(Wishlist)
+admin.site.register(Wishlist,AdminWishlist)
 admin.site.register(Faqs)
 

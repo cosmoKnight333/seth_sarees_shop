@@ -10,7 +10,6 @@ from store.models.wishlist import Wishlist
 from .data import initial_data
 from django.core.mail import send_mail
 
-from django.http import HttpResponse
 
 
 def modify_url(url, param, value):
@@ -56,6 +55,8 @@ def index(request):
     data['corousels']=corousels
     data['reviews']=reviews
     data['title']="Seth Sarees - Varanasi's Finest Silk and Banarasi Sarees Wholesale & Retail Store - Handwoven and Printed Styles"
+    data['meta_description']='Discover a wide range of luxurious and unique Silk and Banarasi Sarees in Varanasi at wholesale and retail prices. Visit our showroom or shop online now.'
+    data['meta_tags']='Banarasi Sarees, Silk Sarees, Varanasi, Wholesale, Retail,Silk,Saree'
     return render(request,'index.html',data)   
 
 def logout(request):

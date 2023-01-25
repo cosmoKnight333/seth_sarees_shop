@@ -2,9 +2,6 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.views import View
 from store.models.product import Product
-from store.models.category import Category
-from store.models.corousel import Corousel
-from store.models.banarasphoto import BanarasPhoto
 from store.models.customer import Customer
 from store.models.wishlist import Wishlist
 from urllib.parse import urlencode, urlparse, parse_qs
@@ -30,7 +27,7 @@ def addtowishlist(request):
 
     if customer_id:
         product_id=request.POST.get('product')
-        wishlist_ylen=len(Wishlist.objects.filter(customer=customer_id))
+        wishlist_len=len(Wishlist.objects.filter(customer=customer_id))
         product=Product.objects.get(id=product_id)
         customer=Customer.objects.get(id=customer_id)
         flag=len(Wishlist.objects.filter(customer=customer_id).filter(product=product_id))

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import  redirect
 from django.contrib.auth.hashers import check_password
 from django.views import View
 from store.models.customer import Customer
