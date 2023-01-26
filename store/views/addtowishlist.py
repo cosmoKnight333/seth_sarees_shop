@@ -19,6 +19,9 @@ def modify_url(url, param, value):
     modified_url = parsed_url._replace(query=new_query_string).geturl()
     return modified_url
 
+import json
+from django.http import JsonResponse
+
 def addtowishlist(request):
     customer_id=request.session.get('customer')
     next = request.POST.get('next', '/')
@@ -35,32 +38,30 @@ def addtowishlist(request):
             wishlist=Wishlist(customer=customer,
                             product=product)
             wishlist.save()
-            return redirect(next)
+            return JsonResponse({'next': next,'status':'added'})
         else :
             modify_url(next,'change_info_error_msg','')
-            print("its in wishlist")
             next=modify_url(next,'is_in_wishlist',str(product.id))
-            print(next)
-            return redirect(next)
+            return JsonResponse({'next': next,'is_in_wishlist':True,'status':'already_added'})
 
     else :
         modify_url(next,'change_info_error_msg','')
-        
         error_msg='Add products to your wishlist - Login Now!'
-        return redirect(modify_url(next, 'error_msg', error_msg))
-        
-        
+        return JsonResponse({'next': modify_url(next, 'error_msg', error_msg),'status':'usernotlogin','error_msg':error_msg})
+
 
 def removeitem(request):
-    customer_id=request.session.get('customer')
     next = request.POST.get('next', '/')
     next=modify_url(next,'is_in_wishlist','')
+    customer_id=request.session.get('customer')
     product_id=request.POST.get('product')
     customer_id=request.session.get('customer')
     customer=Customer.objects.get(id=customer_id)
-    wishlist_len=len(Wishlist.objects.filter(customer=customer_id))
     instance=Wishlist.objects.filter(customer=customer_id).filter(product=product_id)
     instance.delete()
-    return HttpResponseRedirect(next)
+    print(product_id)
+    wishlist_len=len(Wishlist.objects.filter(customer=customer_id))
+    return JsonResponse({'wishlist_len':wishlist_len,'next': next})
+
 
     

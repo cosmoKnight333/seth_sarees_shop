@@ -36,10 +36,9 @@ class Product(models.Model):
             Product.objects.all()
     
     @staticmethod
-    def get_all_products_by_categoryid_random(category_id):
+    def get_all_products_by_categoryid_random(category_id, product_id):
         if category_id:
-            items=Product.objects.filter(category=category_id)
-            return random.sample(list(items), min(10,len(items)))
+            items = Product.objects.filter(category=category_id).exclude(id=product_id)
+            return random.sample(list(items), min(10, len(items)))
         else:
-            Product.objects.all()
-
+            Product.objects.exclude(id=product_id)

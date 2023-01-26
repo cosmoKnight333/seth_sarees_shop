@@ -19,8 +19,15 @@ class Detail(View):
 
         product_id = request.GET.get('product') 
         product_obj=Product.get_product_by_id(product_id)
+        product_obj.in_wishlist = len(Wishlist.objects.filter(customer=customer_id, product=product_obj)) > 0
         data['product_obj'] = product_obj
-        data['products'] = Product.get_all_products_by_categoryid_random(product_obj.category.id)
+        products = Product.get_all_products_by_categoryid_random(product_obj.category.id,product_id)
+        for product in products:
+            product.in_wishlist = len(Wishlist.objects.filter(customer=customer_id, product=product)) > 0
+        for product in products:
+                print(product.in_wishlist,' abe hai kya')
+        data['products']=products
+        
         data['title']=product_obj.meta_title
         data['meta_description']=product_obj.meta_description
         data['meta_tags']=product_obj.meta_tags

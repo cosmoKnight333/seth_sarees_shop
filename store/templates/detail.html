@@ -8,9 +8,9 @@
 </style>
 
     <!-- Shop Detail Start -->
-    <div class="container-fluid py-5">
-        <div class="row px-xl-5">
-            <div class="col-lg-5 pb-5">
+    <div class="container-fluid py-lg-5  py-md-2">
+        <div class="row px-lg-5  ">
+            <div class="col-lg-4 pb-lg-5 pb-md-2">
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner border">
                         <div class="carousel-item active">
@@ -32,45 +32,45 @@
                 </div>
             </div>
 
-            <div class="col-lg-7 py-5">
+            <div class="col-lg-8 py-5">
                 <h3 class="font-weight-semi-bold">{{product_obj.name}}</h3>
-                <p class="mb-4 text-justify" >{{product_obj.description}}</p>
- 
+                <p class="mb-3 text-justify" >{{product_obj.description}}</p>
+                <p class="text-dark font-weight-medium mb-2 ">Other Options:</p>
                 <div class="d-flex mb-4">
-                    <p class="text-dark font-weight-medium mb-0 mr-3">Other Options:</p>
-                    <form class="container-fluid">
+                    <div id="add-to-cart-form" class="container-fluid">
+
                         <div class="row">
-                            <div class="col-6 col-md-3 ">
+                            <div class="col-6 col-md-4 ">
                                 <i class="fa fa-circle mr-1" style="color: #8B0000"></i>Maroon
                             </div>
-                            <div class="col-6 col-md-3 ">
+                            <div class="col-6 col-md-4 ">
                                 <i class="fa fa-circle mr-1" style="color: #4169E1"></i>Blue
                             </div>
-                            <div class="col-6 col-md-3 ">
+                            <div class="col-6 col-md-4 ">
                                 <i class="fa fa-circle mr-1" style="color: #E6E6FA"></i>Lavender
                             </div>
-                            <div class="col-6 col-md-3 ">
+                            <div class="col-6 col-md-4 ">
                                 <i class="fa fa-circle mr-1" style="color: #F5F5DC"></i>Beige
                             </div>
-                            <div class="col-6 col-md-3 ">
+                            <div class="col-6 col-md-4 ">
                                 <i class="fa fa-circle mr-1" style="color: #008080"></i>Teal
                             </div>
-                            <div class="col-6 col-md-3 ">
+                            <div class="col-6 col-md-4 ">
                                 <i class="fa fa-circle mr-1" style="color: #FF7F50"></i>Coral
                             </div>
-                            <div class="col-6 col-md-3 ">
+                            <div class="col-6 col-md-4 ">
                                 <i class="fa fa-circle mr-1" style="color: #40E0D0"></i>Turquoise
                             </div>
-                            <div class="col-6 col-md-3 ">
+                            <div class="col-6 col-md-4 ">
                                 <i class="fa fa-circle mr-1" style="color: #FFDAB9"></i>Peach
                             </div>
-                            <div class="col-6 col-md-3 ">
+                            <div class="col-6 col-md-4 ">
                                 <i class="fa fa-circle mr-1" style="color: #DDA0DD"></i>Plum
                             </div>
-                            <div class="col-6 col-md-3 ">
+                            <div class="col-6 col-md-4 ">
                                 <i class="fa fa-circle mr-1" style="color: #FFDB58"></i>Yellow
                             </div>
-                            <div class="col-6 col-md-3 ">
+                            <div class="col-6 col-md-4 ">
                                 <i class="fa fa-circle mr-1" style="color: #556B2F"></i>Olive Green
                             </div>
                             
@@ -78,7 +78,7 @@
                                 <i class="fa fa-circle mr-1" style="color: #98FB98"></i>Mint Green
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 
  
@@ -87,15 +87,24 @@
                         <i class="fab fa-whatsapp fa-2x ml-1 text-lg"></i>
                         <span class="ml-1 text-lg">Inquire On Whatsapp</span>
                     </a>
-                    <form action="/add-to-wishlist" method="POST" class="w-lg-25 w-md-50 align-self-center">
-                        {% csrf_token %}
-                        <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">
-                        <input type="hidden" name="product" value="{{ product_obj.id }}">
-                        <button type="submit" class="btn btn-primary  ml-1 px-3 d-flex align-items-center w-lg-25 w-md-50 align-self-center">
-                            <i style="color:#444444" class="far fa-heart fa-2x ml-1 text-lg"></i>
-                            <span class="ml-2 text-lg">Add To WishList</span>
-                        </button>
-                    </form>
+                        <form action="/add-to-wishlist" method="POST" class="w-lg-25 w-md-50 align-self-center detail-wishlist-form-{{product_obj.id}}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">
+                            <input type="hidden" name="product" value="{{ product_obj.id }}">
+                            <button type="submit" class="btn btn-primary  ml-1 px-3 d-flex align-items-center w-lg-25 w-md-50 align-self-center">
+                                <i style="color:#444444" class="far fa-heart fa-2x ml-1 text-lg"></i>
+                                <span class="ml-2 text-lg">Add To Wishlist</span>
+                            </button>
+                        </form>
+                        <form action="/remove-item" method="POST" class="w-lg-25 w-md-50 align-self-center detail-wishlist-form-for-removing-{{product_obj.id}}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">
+                            <input type="hidden" name="product" value="{{ product_obj.id }}">
+                            <button type="submit" class="btn btn-primary  ml-1 px-3 d-flex align-items-center w-lg-25 w-md-50 align-self-center">
+                                <i style="color:#444444" class="fas fa-heart fa-2x ml-1 text-lg"></i>
+                                <span class="ml-2 text-lg">Item Wishlisted</span>
+                            </button>
+                        </form>
                 </div>
                 
                 
@@ -151,24 +160,14 @@
                     {%for product in products%}
                     <div class="card product-item border-0" style="height:350px">
                         <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                            <a href="/detail?product={{product.id}}" target="_blank"><img class="img-fluid w-100" src="{{product.image.url}}" alt=""></a>
+                            <a href="/detail?product={{product.id}}" target="_blank"><img class="img-fluid w-100" src="{{product.image.url}}" style="height:300px;" alt=""></a>
                         </div>
-                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                        <div class="card-body border-bottom border-left border-right text-center p-0 pt-4 pb-3">
                             <h6 class="text-truncate mb-3">{{product.name}}</h6>
                             <div class="d-flex justify-content-center">
                             </div>
                         </div>
-                        <div class="card-footer d-flex justify-content-between bg-light border">
-                            <a href="/detail?product={{product.id}}" target="_blank" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                            <form action="/add-to-wishlist" method="POST">
-                                {%csrf_token%}
-                                <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">     
-                                <input type="hidden" name="product" value="{{ product.id }}">     
-                                <button type="submit" class="btn btn-sm text-dark add-to-cart-btn p-0 wishlist-btn" >
-                                    <i class="fa fa-heart text-primary mr-1 heart-icon"></i> Add To Wishlist
-                                </button>       
-                            </form>
-                        </div>
+                        
                     </div>
                     {%endfor%}
                     
@@ -177,6 +176,17 @@
         </div>
     </div>
     <!-- Products End here -->
+    {%for product in products%}
+    <script>
+        {%if product.in_wishlist%}
+            document.querySelector(".wishlist-form-for-removing-{{product.id}}").style.display = "block";
+            document.querySelector(".wishlist-form-{{product.id}}").style.display = "none";
+        {%else%}
+            document.querySelector(".wishlist-form-for-removing-{{product.id}}").style.display = "none";
+            document.querySelector(".wishlist-form-{{product.id}}").style.display = "block";
+        {% endif %}
+    </script>
+    {%endfor%}
     <script>
         document.querySelectorAll(".wishlist-btn").forEach(function(btn) {
             btn.addEventListener("click", function(){
@@ -184,6 +194,143 @@
             });
         });
     </script>
+    <script>
+        {%if product_obj.in_wishlist%}
+            document.querySelector(".detail-wishlist-form-for-removing-{{product_obj.id}}").style.display = "block";
+            document.querySelector(".detail-wishlist-form-{{product_obj.id}}").style.display = "none";
+        {%else%}
+            document.querySelector(".detail-wishlist-form-for-removing-{{product_obj.id}}").style.display = "none";
+            document.querySelector(".detail-wishlist-form-{{product_obj.id}}").style.display = "block";
+    
+        {% endif %}
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.detail-wishlist-form-{{product_obj.id}}').on('submit', function(e) {
+                e.preventDefault(); // prevent form from submitting as usual
+        
+                var form = $(this);
+                var url = form.attr('action'); // get form action
+                var data = form.serialize(); // get form data as an object
+                // make ajax request to add product to wishlist
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: data,
+                    success: function(response){
+                        if(response.status=='already_added') {
+                            $('.wishlist-form-content-{{product.id}}').html('<i class="fas fa-heart fa-1x ml-1 text-lg"></i><span class="ml-2 text-lg">Already in Wishlist</span>');
+                        }
+                        else if(response.status=='added') {
+                            var badgeValue = parseInt($('.badge').text().split(":")[1]);
+                            badgeValue += 1;
+                            document.querySelector(".detail-wishlist-form-for-removing-{{product_obj.id}}").style.display = "block";
+                            document.querySelector(".detail-wishlist-form-{{product_obj.id}}").style.display = "none";
+                            $('.badge').html("Wishlist: " + badgeValue);
+                        }
+                        else{
+                            $(document).ready(function() {
+                                $('#loginModal').modal('show');
+                            });
+                        }
+                        window.location.href = next;
+                    },
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.detail-wishlist-form-for-removing-{{product_obj.id}}').on('submit', function(e) {
+                e.preventDefault(); // prevent form from submitting as usual
+                var form = $(this);
+                var url = form.attr('action'); // get form action
+                var data = form.serialize(); 
+        
+                // make ajax request to remove product from wishlist
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: data,
+                    success: function(response){
+                        document.querySelector(".detail-wishlist-form-for-removing-{{product_obj.id}}").style.display = "none";
+                        document.querySelector(".detail-wishlist-form-{{product_obj.id}}").style.display = "block";
+                        var badgeValue = parseInt($('.badge').text().split(":")[1]);
+                        badgeValue -= 1;
+                        $('.badge').html("Wishlist: " + badgeValue);
+
+                    },
+                });
+            });
+        });
+
+        </script>
+
+        {%for product in products%}
+        <script>
+            $(document).ready(function() {
+                $('.wishlist-form-{{product.id}}').on('submit', function(e) {
+                    e.preventDefault(); // prevent form from submitting as usual
+            
+                    var form = $(this);
+                    var url = form.attr('action'); // get form action
+                    var data = form.serialize(); // get form data as an object
+                    // make ajax request to add product to wishlist
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: data,
+                        success: function(response){
+                            if(response.status=='already_added') {
+        
+                            }
+                            else if(response.status=='added') {
+                                var badgeValue = parseInt($('.badge').text().split(":")[1]);
+                                badgeValue += 1;
+                                $('.badge').html("Wishlist: " + badgeValue);
+        
+                                document.querySelector(".wishlist-form-for-removing-{{product.id}}").style.display = "block";
+                                document.querySelector(".wishlist-form-{{product.id}}").style.display = "none";
+                            }
+                            else{
+                                $(document).ready(function() {
+                                    $('#loginModal').modal('show');
+                                });
+                            }
+                            window.location.href = next;
+                        },
+                    });
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('.wishlist-form-for-removing-{{product.id}}').on('submit', function(e) {
+                    e.preventDefault();
+                    var form = $(this);
+                    var carouselItem = form.closest('.product-item');
+                    var removeBtn = carouselItem.find('.wishlist-form-for-removing-{{product.id}}');
+                    var addBtn = carouselItem.find('.wishlist-form-{{product.id}}');
+                    //make ajax request to remove product from wishlist
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: data,
+                        success: function(response){
+                           removeBtn.hide();
+                           addBtn.show();
+                           var badgeValue = parseInt($('.badge').text().split(":")[1]);
+                           badgeValue -= 1;
+                           $('.badge').html("Wishlist: " + badgeValue);
+                        },
+                    });
+                 });
+            });
+        
+            </script>
+        
+        {%endfor%}
+        
 {% endblock content%}
 
 {% block category_nav %}

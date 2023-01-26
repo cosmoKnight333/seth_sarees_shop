@@ -24,6 +24,8 @@
     </div>
 </div>
 <!-- Page Header End -->
+
+
 <!-- Shop Start -->
 <div class="container-fluid pt-5">
     <div class="row px-xl-5">
@@ -32,10 +34,10 @@
                 {%for product in products%}
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="card product-item border-0" style="padding: 30px;">
-                        <div class="card-body border-left border-right border-top text-center p-3 d-flex flex-column align-items-around justify-content-center">
+                        <div class="card-body border-left border-right border-top text-center p-3 d-flex flex-column align-items-around justify-content-center" style="height:320px">
                             <a href="/detail?product={{product.id}}" target="_blank">
                                 <div class="product-img position-relative overflow-hidden bg-transparent  p-0">
-                                    <img class="img-fluid w-100" src="{{product.image.url}}" alt="" style="max-height:250px; object-fit: contain">
+                                    <img class="img-fluid w-100" src="{{product.image.url}}" alt="" style="max-height:280px; object-fit: contain">
                                 </div>
                             </a>
                             <h6 class="text-truncate mt-3">{{product.name}}</h6>
@@ -44,12 +46,20 @@
                             <a href="/detail?product={{product.id}}" target="_blank" class="btn btn-sm text-dark p-0">
                                 <i class="fas fa-eye text-primary mr-1"></i>View Detail
                             </a>
-                            <form action="/add-to-wishlist" method="POST">
+                            <form action="/add-to-wishlist" method="POST" class="wishlist-form-{{product.id}}">
                                 {%csrf_token%}
                                 <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">     
                                 <input type="hidden" name="product" value="{{ product.id }}">     
                                 <button type="submit" class="btn btn-sm text-dark add-to-cart-btn p-0" id="wishlist-btn-{{product.id}}">
-                                    <i class="fa fa-heart text-primary mr-1" id="heart-icon-{{product.id}}"></i> Add To Wishlist
+                                    <i class="far fa-heart text-primary mr-1" id="heart-icon-{{product.id}}"></i> Add To Wishlist
+                                </button>
+                            </form>
+                            <form action="/remove-item" method="POST" class="wishlist-form-for-removing-{{product.id}}">
+                                {%csrf_token%}
+                                <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">     
+                                <input type="hidden" name="product" value="{{ product.id }}">     
+                                <button type="submit" class="btn btn-sm text-dark add-to-cart-btn p-0" id="wishlist-btn-{{product.id}}">
+                                    <i class="fas fa-heart text-primary mr-1" id="heart-icon-{{product.id}}"></i> Item Wishlisted
                                 </button>
                             </form>   
                         </div>
@@ -61,13 +71,84 @@
     </div>
 </div>
 <!-- Shop End -->
+{%for product in products%}
 <script>
-    {% for product in products %}
-    document.getElementById("wishlist-btn-{{product.id}}").addEventListener("click", function(){
-    document.getElementById("heart-icon-{{product.id}}").classList.toggle("fa-2x");
-});
-    {% endfor %}
+    {%if product.in_wishlist%}
+        document.querySelector(".wishlist-form-for-removing-{{product.id}}").style.display = "block";
+        document.querySelector(".wishlist-form-{{product.id}}").style.display = "none";
+    {%else%}
+        document.querySelector(".wishlist-form-for-removing-{{product.id}}").style.display = "none";
+        document.querySelector(".wishlist-form-{{product.id}}").style.display = "block";
+    {% endif %}
 </script>
+{%endfor%}
+{%for product in products%}
+
+<script>
+    $(document).ready(function() {
+        $('.wishlist-form-{{product.id}}').on('submit', function(e) {
+            e.preventDefault(); // prevent form from submitting as usual
+    
+            var form = $(this);
+            var url = form.attr('action'); // get form action
+            var data = form.serialize(); // get form data as an object
+            // make ajax request to add product to wishlist
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                success: function(response){
+                    if(response.status=='already_added') {
+
+                    }
+                    else if(response.status=='added') {
+                        var badgeValue = parseInt($('.badge').text().split(":")[1]);
+                        badgeValue += 1;
+                        $('.badge').html("Wishlist: " + badgeValue);
+
+                        document.querySelector(".wishlist-form-for-removing-{{product.id}}").style.display = "block";
+                        document.querySelector(".wishlist-form-{{product.id}}").style.display = "none";
+                    }
+                    else{
+                        $(document).ready(function() {
+                            $('#loginModal').modal('show');
+                        });
+                    }
+                    window.location.href = next;
+                },
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('.wishlist-form-for-removing-{{product.id}}').on('submit', function(e) {
+            e.preventDefault(); // prevent form from submitting as usual
+            var form = $(this);
+            var url = form.attr('action'); // get form action
+            var data = form.serialize(); 
+    
+            // make ajax request to remove product from wishlist
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                success: function(response){
+                    document.querySelector(".wishlist-form-for-removing-{{product.id}}").style.display = "none";
+                    document.querySelector(".wishlist-form-{{product.id}}").style.display = "block";
+                    var badgeValue = parseInt($('.badge').text().split(":")[1]);
+                    badgeValue -= 1;
+                    $('.badge').html("Wishlist: " + badgeValue);
+
+                },
+            });
+        });
+    });
+
+    </script>
+
+{%endfor%}
+
 {% endblock content%}
 
 {% block category_nav %}
