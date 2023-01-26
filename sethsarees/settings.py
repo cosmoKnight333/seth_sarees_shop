@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_PASSWORD = 'ersberqhndflvdxi'
 
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
@@ -31,7 +30,7 @@ SECRET_KEY = 'django-insecure-t7b*-08#&e1p^4p!)bgrsylr4oxh4$j1+5-dsi7ojx56yx-udz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
