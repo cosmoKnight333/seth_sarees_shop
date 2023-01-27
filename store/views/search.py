@@ -32,7 +32,7 @@ def search(request):
 
     
     category_names = Category.objects.values_list('name', flat=True)
-    category_name_matches = process.extractBests(query, category_names, score_cutoff=70, limit=12)    
+    category_name_matches = process.extractBests(query, category_names, score_cutoff=90, limit=12)    
     category_names = [match[0] for match in category_name_matches]
 
     
