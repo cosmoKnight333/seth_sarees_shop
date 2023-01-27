@@ -44,7 +44,35 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{% static '/store/css/style.css' %}" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
+    <style>
+        #suggestions-list {
+            list-style: none; /* remove the bullets/dots */
+            position: absolute; /* position the list absolute to the parent element */
+            top: 100%; /* set the top position to 100% of the parent element */
+            left: 0; /* set the left position to 0 */
+            width: 100%; /* set the width to 100% of the parent element */
+            z-index: 2; /* set the z-index to 1 to make sure it appears on top */
+        }
+        .search-container {
+            position: relative; /* set the position to relative */
+        }
+        #suggestions-list li {
+            padding: 0.5em 1em; /* add padding to the list items */
+            border-bottom: 1px solid #f5f5f5; /* add a border-bottom to separate the items */
+            transition: background-color 0.2s ease-in-out; /* add a transition for the hover effect */
+            background:white;
+            color:black;
+        }
+        
+        #suggestions-list li:hover {
+            background-color: #f5f5f5; /* change the background color on hover */
+            cursor: pointer; /* change the cursor to a pointer */
+            color:#ba6a62;
+        }
+        
+    </style>
+
+
 </head>
 
 <body>
@@ -82,18 +110,23 @@
                     <h1 class="m-2 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Seth</span>Sarees</h1>
                 </a>
             </div>
-            <div class="col-lg-6 col-7 text-left">
-                <form method="GET" action="/search" >
-                    
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search Product" name="search" id="search">
-                        <div class="input-group-append">
-                            <button class=" btn btn-primary input-group-text  bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
+            <div class="col-lg-6 col-7 text-left pr-0 mr-0">
+                <div class="search-container">
+                    <form method="GET" action="/search" class="searchForm" autocomplete="off">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control border-right-0" placeholder="Search Product" name="search" id="search" autocomplete="off">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-primary  rounded-0" type="submit" autocomplete="off" style="border-color:#eeeeee;">
+                                                    <i class="fa fa-search" ></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown">
+                                            <ul class="list-group list-group-flush" id="suggestions-list"></ul>
+                                        </div>
+                        </form>
                     </div>
-                </form>
+
             </div>
             <div class="col-lg-3 col-5 text-right">
                 <a href="/wishlist?next={{ request.get_full_path }}" class="btn border ">
@@ -573,5 +606,36 @@
         });
     </script>
     {% endif %}
-
+    <script>
+        $(document).ready(function() {
+            $("#search").on("keyup", function() {
+                var searchTerm = $(this).val();
+                // Make an AJAX call to the server
+                $.ajax({
+                    type: "GET",
+                    url: "/search-suggestions",
+                    data: {search: searchTerm},
+                    success: function(response) {
+                        var suggestionsList = $("#suggestions-list");
+                        suggestionsList.empty();
+                        // Show the list of suggestions
+                        response.suggestions.forEach(function(suggestion) {
+                            suggestionsList.append("<li>" + suggestion + "</li>");
+                        });
+                        $("#suggestions-list li").click(function(){
+                            $("#search").val($(this).text());
+                            $(".searchForm").submit();
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    
+    <script>
+        $(document).on('click', '#suggestions-list li', function(){
+            $("#search").val($(this).text());
+            $(".searchForm").submit();
+        });
+    </script>
 </body>

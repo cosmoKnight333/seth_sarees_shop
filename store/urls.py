@@ -2,6 +2,7 @@ from django.urls import path
 from .views.home import index,logout
 from .views.category import show_category
 from .views.search import search
+from .views.search import search_suggestions
 from .views.about import show_about
 from .views.support import show_support
 from .views.privacy_policy import show_privacy_policy
@@ -23,6 +24,8 @@ urlpatterns = [
     path('',index,name='homepage'),
     path('category',show_category),
     path('search',search),
+    path('search-suggestions',search_suggestions),
+    
     path('logout',logout),
     path('wishlist',show_wishlist),
     path('add-to-wishlist',addtowishlist),

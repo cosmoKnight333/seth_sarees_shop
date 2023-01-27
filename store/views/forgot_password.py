@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 
 
 def send_otp_email(user_email, otp):
-    subject = 'Password Reset OTP'
+    subject = 'Welcome to Seth Sarees'
     message = render_to_string('otp_email.html', {'otp': otp})
     send_mail(subject, '', 'sethsarees@gmail.com', [user_email], html_message=message)
 

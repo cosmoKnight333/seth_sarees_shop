@@ -7,10 +7,16 @@ from urllib.parse import urlencode, urlparse
 from urllib.parse import  parse_qs
 import random
 import re
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+
 def email_exists(email):
     regex = r'^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
     return bool(re.search(regex, email))
+def send_welcome_email(user_email):
+    subject = 'Password Reset OTP'
+    message = render_to_string('welcome_email.html',)
+    send_mail(subject, '', 'sethsarees@gmail.com', [user_email], html_message=message)
 
 # def is_sandbox_participant(phone_number:str, account_sid:str, auth_token:str, service_sid:str) -> bool:
 #     client = Client(account_sid, auth_token)
@@ -80,4 +86,5 @@ class Signup(View):
             request.session['customer_phone_number'] = customer.phone_number
             request.session['customer_email'] = customer.email
             request.session['customer_country_code'] = customer.country_code
+            send_welcome_email(email)
             return redirect(modify_url(url,'signup_error_msg',''))

@@ -7,6 +7,7 @@ from store.models.wishlist import Wishlist
 from django.db.models import Q
 from .data import initial_data
 from fuzzywuzzy import process
+from django.http import JsonResponse
 def search(request):
     data = initial_data
     customer_id = request.session.get('customer')
@@ -41,11 +42,25 @@ def search(request):
         Q(category__name__in=category_names) 
     )
 
-    data['query'] = "Your search results for: " + query
+    data['query'] = "Search results for: " + query
     data['categories'] = categories
     data['products'] = products
     data['meta_description']='Find the perfect saree from our extensive collection of traditional Banarasi sarees at our store in the historic chauk area of Varanasi. Our collection features a wide range of luxurious and unique sarees to suit all tastes and budgets including traditional hand-woven silk and more modern printed styles. Our showroom is elegantly adorned with an array of stunning options and our team of knowledgeable and friendly staff are always on hand to assist customers in finding the perfect saree for any occasion. Follow us on social media or sign up  special discounts and promotions. Visit our store today!'
     data['meta_tags']='Search, results, sarees, Banarasi, Varanasi, traditional, luxurious, unique, hand-woven silk, modern printed styles, wholesaler, retailer, showroom, knowledgeable staff, excellent customer service, social media, email list, special discounts, promotions'
     data['title']="Search Sarees - Results for '"+ query+"'"
     return render(request, 'search.html', data)
-    
+
+
+def search_suggestions(request):
+    search_term = request.GET.get('search', '')
+    if(search_term):
+        products = Product.objects.filter(name__icontains=search_term)
+        categoreis = Category.objects.filter(name__icontains=search_term)
+        product_names=[]
+        for category in categoreis:
+            product_names.append(category.name)
+        for product in products:
+            product_names.append(product.name)
+        return JsonResponse({'suggestions': product_names[:6]})
+    else:
+        return JsonResponse({'suggestions': []})
