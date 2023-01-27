@@ -6,7 +6,7 @@ from store.models.customer import Customer
 from store.models.wishlist import Wishlist
 from .data import initial_data
 
-def show_category(request):
+def show_category(request, category_id):
     data = initial_data
     customer_id = request.session.get('customer')
     data['wishlist_len']=0
@@ -16,9 +16,8 @@ def show_category(request):
     error_msg=''
     error_msg = request.GET.get('error_msg')
     data['error_msg'] = error_msg
-
-    category_id = request.GET.get('category')
-    if category_id:
+    data['category_id']=category_id
+    if category_id !=0:
         products=Product.get_all_products_by_categoryid(category_id)
         category_obj=Category.objects.get(pk=category_id)
         data['category_obj'] = category_obj
@@ -36,7 +35,6 @@ def show_category(request):
     
     for product in products:
             product.in_wishlist = len(Wishlist.objects.filter(customer=customer_id, product=product)) > 0
-    for product in products:
-            print(product.in_wishlist,' abe hai kya')
+
     data['products']=products
     return render(request, 'category.html', data)

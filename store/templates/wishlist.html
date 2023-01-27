@@ -5,12 +5,10 @@
     <!-- Page Header Start -->
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-            <h2 class="font-weight-semi-bold  mb-3">Your Wishlist</h2>
+            <h2 class="font-weight-semi-bold wishlist-heading  mb-3">Your Wishlist {%if not wishlist_len %}Is Empty {%endif%} </h2>
             <div class="d-flex flex-column text-center align-items-center justify-content-center ">
-                <p class="m-0 mb-2"><a href="/category">Explore Our Range</a></p>
-                
+                <p class="m-0 mb-2"><a href="/0">Explore Our Range</a></p>
                 <p class="m-0"> 
-                    
                     <a  href="https://wa.me/{{phone_no}}?text= Hey I am {{customer_name}} and I have prepared my list on URL: {{ request.get_host }}/show-sent-list?customer_id={{request.session.customer}} kindly check it" target="_blank" class="btn btn-primary px-3">WhatsApp list to us</a>
                 </p>
             </div>
@@ -62,7 +60,7 @@
             var form = $(this);
             var url = form.attr('action'); // get form action
             var data = form.serialize(); 
-    
+            
             // make ajax request to remove product from wishlist
             $.ajax({
                 type: 'POST',
@@ -73,7 +71,13 @@
                     var badgeValue = parseInt($('.badge').text().split(":")[1]);
                     badgeValue -= 1;
                     $('.badge').html("Wishlist: " + badgeValue);
+                    if(badgeValue==0){
+                        
+                        $(".wishlist-heading").html("Your Wishlist is Empty");
+                        document.querySelector(".wishlist-form-for-removing-{{product.id}}").html = "none"; 
 
+                        document.querySelector(".wishlist-form-for-removing-{{product.id}}").style.display = "none"; 
+                    }
                 },
             });
         });

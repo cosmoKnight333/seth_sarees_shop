@@ -161,7 +161,7 @@
                             </div>
                         </div> {% endcomment %}
                         {%for category in categories%}
-                            <a href="/category?category={{category.id}}" class="nav-item nav-link">{{category.name}}</a>
+                            <a href="/{{category.id}}" class="nav-item nav-link">{{category.name}}</a>
                         {%endfor%}
 
                         </div>
@@ -179,12 +179,12 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="/" class="nav-item nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
                             <a href="/about" class="nav-item nav-link {% if request.path == '/about' %}active{% endif %}">About</a>
-                            <a href="/category" class="nav-item nav-link {% if request.path == '/category' %}active{% endif %}">All Sarees</a>
+                            <a href="/0" class="nav-item nav-link {% if request.path == '/category' %}active{% endif %}">All Sarees</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Categories</a>
                                 <div class="dropdown-menu rounded-0 m-0">
                                     {%for category in categories%}
-                                        <a href="/category?category={{category.id}}" class="dropdown-item">{{category.name}}</a>
+                                        <a href="/{{category.id}}" class="dropdown-item">{{category.name}}</a>
                                      {%endfor%}
                                 
                                 
@@ -489,7 +489,7 @@
                         <div class="d-flex flex-column justify-content-start">
                             <a class="text-dark mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Home</a>
                             <a class="text-dark mb-2" href="/about"><i class="fa fa-angle-right mr-2"></i>About</a>
-                            <a class="text-dark mb-2" href="/category"><i class="fa fa-angle-right mr-2"></i>All Sarees</a>
+                            <a class="text-dark mb-2" href="/0"><i class="fa fa-angle-right mr-2"></i>All Sarees</a>
                             <a class="text-dark mb-2" href="/wishlist"><i class="fa fa-angle-right mr-2"></i>Wishlist</a>
                             <a class="text-dark mb-2" href="/contact"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             <a class="text-dark mb-2" target="_blank" href="/support"><i class="fa fa-angle-right mr-2"></i>Support</a>
@@ -500,7 +500,7 @@
                         <h5 class="font-weight-bold text-dark mb-4">Top Categories</h5>
                         <div class="d-flex flex-column justify-content-start">
                             {% for category in categories|slice:":6" %}
-                            <a class="text-dark mb-2" href="/category?category={{category.id}}"><i class="fa fa-angle-right mr-2"></i>{{category}}</a>
+                            <a class="text-dark mb-2" href="/{{category.id}}"><i class="fa fa-angle-right mr-2"></i>{{category}}</a>
                             {% endfor %}
                             
                         </div>

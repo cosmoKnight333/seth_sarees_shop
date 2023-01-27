@@ -22,7 +22,6 @@ from .views.take_to_change_password import Take_To_Change_Password
 
 urlpatterns = [
     path('',index,name='homepage'),
-    path('category',show_category),
     path('search',search),
     path('search-suggestions',search_suggestions),
     
@@ -37,10 +36,11 @@ urlpatterns = [
     path('about',show_about),
     path('support',show_support),
     path('privacy_policy',show_privacy_policy),
-    path('detail',Detail.as_view(),name="detail"),
     path('login',Login.as_view(),name='login'),
     path('signup',Signup.as_view(),name='signup'),
     path('change_info',Change_Info.as_view(),name='change_info'),
     path('show-sent-list',show_sent_list),
+    path('<int:category_id>/', show_category, name='category'),
+    path('<int:category_id>/<int:product_id>/', Detail.as_view(),name="detail"),
 
 ]
