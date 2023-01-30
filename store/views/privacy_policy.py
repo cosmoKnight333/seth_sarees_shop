@@ -19,7 +19,7 @@ def show_privacy_policy(request):
         data['wishlist_len'] = wishlist_len
     faqs=Faqs.objects.all()
     data['faqs']=faqs
-    data['title']="Terms and Conditions and Privacy Policy for Seth Sarees"
-    data['meta_description']='Learn more about our terms and conditions when shopping at our store. Shop with confidence and understand our policies on returns, exchanges, and more.'
-    data['meta_tags']='Terms and conditions, shop, confidence'
+    data['title']="Seth Sarees-Terms and Conditions and Privacy Policy"
+    data['meta_description']='Learn more about our terms and conditions when shopping at our store. Shop with confidence and understand our policies on returns, exchanges, and more.Visit Seth Sarees showroom or shop online now.'
+    data['meta_tags']='Seth Sarees,Terms and conditions, shop, confidence'
     return render(request, 'privacy_policy.html', data)

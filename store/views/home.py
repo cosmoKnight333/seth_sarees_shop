@@ -54,9 +54,9 @@ def index(request):
     data['categories']=categories
     data['corousels']=corousels
     data['reviews']=reviews
-    data['title']="Seth Sarees - Varanasi's Finest Silk and Banarasi Sarees Wholesale & Retail Store - Handwoven and Printed Styles"
-    data['meta_description']='Discover a wide range of luxurious and unique Silk and Banarasi Sarees in Varanasi at wholesale and retail prices. Visit our showroom or shop online now.'
-    data['meta_tags']='Banarasi Sarees, Silk Sarees, Varanasi, Wholesale, Retail,Silk,Saree'
+    data['title']="Seth Sarees-Finest Silk and Banarasi Sarees Wholesale & Retail Store"
+    data['meta_description']='Discover a wide range of luxurious and unique Silk and Banarasi Sarees in Varanasi at wholesale and retail prices. Visit Seth Sarees showroom or shop online now.'
+    data['meta_tags']='Seth Sarees,Banarasi Sarees, Silk Sarees, Varanasi, Wholesale, Retail,Silk,Saree'
     return render(request,'index.html',data)   
 
 def logout(request):

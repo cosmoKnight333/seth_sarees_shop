@@ -32,7 +32,7 @@ class Change_Password(View):
             data['customer_verification_token']=customer.verification_token
             data['customer_name']=customer.first_name
             data['title']='Change Password - Secure Your Account'
-            data['meta_description']='Ensure the security of your account by updating your password. Our change password page is for verified users to easily update their password for added protection.'
+            data['meta_description']='Ensure the security of your account by updating your password. Seth Sares change password page is for verified users to easily update their password for added protection.'
             data['meta_tags']='Change password, secure account, verified user, password'
            
             return render(request, 'change_password.html', data)

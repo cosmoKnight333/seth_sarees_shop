@@ -6,28 +6,35 @@ from store.models.contact import Contact
 
 class CategorySitemap(Sitemap):
     changefreq='weekly'
-    priority=0.9 
+    priority=0.85
     def items(self):
         return Category.objects.all()
 class ProductSitemap(Sitemap):
     changefreq='weekly'
-    priority=0.9 
+    priority=0.70
     def items(self):
         return Product.objects.all()
 
 class AboutSitemap(Sitemap):
+    changefreq='weekly'
+    priority=0.75
     def items(self):
         return ['about']
     def location(self, item):
         return reverse(item)
     
 class IndexSitemap(Sitemap):
+    changefreq='weekly'
+    priority=1 
     def items(self):
         return ['']
     def location(self, item):
         return (item)
 
 class ContactSitemap(Sitemap):
+    changefreq='weekly'
+    priority=0.51
+
     def items(self):
         return ['contact']
     def location(self, item):
@@ -40,6 +47,8 @@ class PrivacyPolicySitemap(Sitemap):
         return reverse(item)
     
 class SupportSitemap(Sitemap):
+    changefreq='weekly'
+    priority=0.75
     def items(self):
         return ['support']
     def location(self, item):

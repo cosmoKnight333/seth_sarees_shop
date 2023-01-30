@@ -12,6 +12,12 @@
         <meta property="og:image" content="">
         <meta property="og:type" content="website">
         <!-- OG Tag END -->
+    <!-- Cannonical tags-->
+    {% if request.get_full_path %}
+    <link rel="canonical" href="{{ request.build_absolute_uri }}"/>
+    {% endif %}
+    <!-- Cannonical Tag End-->
+
 
     <title>
         {%if title%}
@@ -474,15 +480,38 @@
     <!-- Footer Start -->
     <footer class="container-fluid bg-secondary text-dark mt-5 pt-5">
         <div class="row px-xl-5 pt-5">
-            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5" itemscope itemtype="http://schema.org/LocalBusiness">
+                
                 <a href="/" class="text-decoration-none">
-                    <h1 class="mb-4 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border border-white px-3 mr-1">Seth</span>Sarees</h1>
+                    <h1 itemprop="name" class="mb-4 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border border-white px-3 mr-1">Seth</span>Sarees</h1>
                 </a>
                 <p>Retailer and wholeseller in all kinds of Banarasi and Silk Sarees.</p>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i><a href="https://www.google.com/search?q=seth%20sarees&oq=seth&aqs=chrome.0.69i59j69i57j69i59j69i60j69i61l2j69i60.1882j0j4&sourceid=chrome&ie=UTF-8&tbs=lf:1,lf_ui:10&tbm=lcl&sxsrf=ALiCzsaSynD1unvd0ebaW9NJ0Fx-3SjwXA:1671827345404&rflfq=1&num=10&rldimm=527673046138865702&lqi=CgtzZXRoIHNhcmVlc0iz8qLwsq6AgAhaHRAAEAEYABgBIgtzZXRoIHNhcmVlcyoGCAIQABABkgEXZGVzaWduZXJfY2xvdGhpbmdfc3RvcmU&phdesc=J3chXqvknqQ&ved=2ahUKEwjjtbGYypD8AhVH03MBHdmAB1gQvS56BAgYEAE&sa=X&rlst=f#rlfi=hd:;si:527673046138865702,l,CgtzZXRoIHNhcmVlc0iz8qLwsq6AgAhaHRAAEAEYABgBIgtzZXRoIHNhcmVlcyoGCAIQABABkgEXZGVzaWduZXJfY2xvdGhpbmdfc3RvcmU,y,J3chXqvknqQ;mv:[[25.6578831,83.0200176],[25.2926608,82.8717667]];tbs:lrf:!1m4!1u3!2m2!3m1!1e1!2m1!1e3!3sIAE,lf:1,lf_ui:10 "  target="_blank"style="color:black;">{{address}}</a></p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i><a href="mailto:sethsarees@gmail.com"  target="_blank" style="color:black;">{{email}}</a></p>
-                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i><a href="tel:+{{phone_no}}" style="color:black;"> +{{phone_no}}</a></p>
-                
+                <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                    <div class="d-flex mb-2">
+                      <i class="fa m-0 pt-2 fa-map-marker-alt text-primary mr-3"></i>
+                      <div>
+                        <a href="https://www.google.com/search?q=seth%20sarees&oq=seth&aqs=chrome.0.69i59j69i57j69i59j69i60j69i61l2j69i60.1882j0j4&sourceid=chrome&ie=UTF-8&tbs=lf:1,lf_ui:10&tbm=lcl&sxsrf=ALiCzsaSynD1unvd0ebaW9NJ0Fx-3SjwXA:1671827345404&rflfq=1&num=10&rldimm=527673046138865702&lqi=CgtzZXRoIHNhcmVlc0iz8qLwsq6AgAhaHRAAEAEYABgBIgtzZXRoIHNhcmVlcyoGCAIQABABkgEXZGVzaWduZXJfY2xvdGhpbmdfc3RvcmU&phdesc=J3chXqvknqQ&ved=2ahUKEwjjtbGYypD8AhVH03MBHdmAB1gQvS56BAgYEAE&sa=X&rlst=f#rlfi=hd:;si:527673046138865702,l,CgtzZXRoIHNhcmVlc0iz8qLwsq6AgAhaHRAAEAEYABgBIgtzZXRoIHNhcmVlcyoGCAIQABABkgEXZGVzaWduZXJfY2xvdGhpbmdfc3RvcmU,y,J3chXqvknqQ;mv:[[25.6578831,83.0200176],[25.2926608,82.8717667]];tbs:lrf:!1m4!1u3!2m2!3m1!1e1!2m1!1e3!3sIAE,lf:1,lf_ui:10" target="_blank" style="color:black;">
+                          <span itemprop="streetAddress">{{streetAddress}},</span>
+                          <span itemprop="addressLocality">{{addressLocality}}</span> 
+                          <span itemprop="addressRegion"> {{addressRegion}}</span> 
+                          <span itemprop="postalCode">{{postalCode}}</span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="d-flex mb-2">
+                      <i class="fa fa-envelope text-primary mr-3"></i>
+                      <div>
+                        <a itemprop="email" href="mailto:sethsarees@gmail.com" target="_blank" style="color:black;">{{email}}</a>
+                      </div>
+                    </div>
+                    <div class="d-flex mb-0">
+                      <i class="fa fa-phone-alt text-primary mr-3"></i>
+                      <div>
+                        <a itemprop="telephone" href="tel:+{{phone_no}}" style="color:black;"> +{{phone_no}}</a>
+                      </div>
+                    </div>
+                    <meta itemprop="description" content="Seth Sarees is a business store website for banarasi sarees located in Varanasi.">
+                  </div>
             </div>
             <div class="col-lg-8 col-md-12">
                 <div class="row">
@@ -502,7 +531,7 @@
                         <h5 class="font-weight-bold text-dark mb-4">Top Categories</h5>
                         <div class="d-flex flex-column justify-content-start">
                             {% for category in categories|slice:":6" %}
-                            <a class="text-dark mb-2" href="/{{category.id}}"><i class="fa fa-angle-right mr-2"></i>{{category}}</a>
+                            <a class="text-dark mb-2" href="{% url 'category' category.id %}"><i class="fa fa-angle-right mr-2"></i>{{category}}</a>
                             {% endfor %}
                             
                         </div>
@@ -659,16 +688,15 @@
         }
       
         // add event listener to password input
-        document.getElementById("password").addEventListener("input", function() {
+        document.getElementById("password-signup").addEventListener("input", function() {
           validatePassword(this.value);
         });
       
         // add event listener to form submit
         document.getElementById("signupform").addEventListener("submit", function(e) {
-          if (!validatePassword(document.getElementById("password").value)) {
+          if (!validatePassword(document.getElementById("password-signup").value)) {
             e.preventDefault();
           }
         });
-        $(".sticky-btn").hide();
       </script>
 </body>

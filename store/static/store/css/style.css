@@ -9569,7 +9569,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .sticky-btn {
-  z-index: 9999;
+  z-index: 100;
   position: fixed;
   bottom: 45px;
   right: 20px;

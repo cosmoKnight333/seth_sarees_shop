@@ -56,8 +56,13 @@
     {%for entry in wishlist%}
     $(document).ready(function() {
         $('.remove-item-form-{{entry.id}}').on('submit', function(e) {
-            e.preventDefault(); // prevent form from submitting as usual
-            var form = $(this);
+        e.preventDefault(); // prevent form from submitting as usual
+        var form = $(this);
+            // Check if the form has already been submitted
+            if (form.data('submitted') === true) {
+                return false;
+            }
+            
             var url = form.attr('action'); // get form action
             var data = form.serialize(); 
             
@@ -72,17 +77,17 @@
                     badgeValue -= 1;
                     $('.badge').html("Wishlist: " + badgeValue);
                     if(badgeValue==0){
-                        
                         $(".wishlist-heading").html("Your Wishlist is Empty");
                         document.querySelector(".wishlist-form-for-removing-{{product.id}}").html = "none"; 
-
                         document.querySelector(".wishlist-form-for-removing-{{product.id}}").style.display = "none"; 
                     }
                 },
-            });
         });
+        // Set the form's submitted status to true
+        form.data('submitted', true);
     });
-    
+});
+        
     {%endfor%}
 
 </script>

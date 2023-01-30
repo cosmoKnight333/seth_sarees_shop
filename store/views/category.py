@@ -27,9 +27,9 @@ def show_category(request, category_id):
         data['products'] = products
 
     else:
-        data['title']="Saree Collection - Explore Our Extensive Range of Luxurious Silk and Banarasi Sarees - Wholesale and Retail"
-        data['meta_description']='Discover a wide range of luxurious and unique Silk and Banarasi Sarees in Varanasi at wholesale and retail prices. Visit our showroom or shop online now.'
-        data['meta_tags']='Banarasi Sarees, Silk Sarees, Varanasi, Wholesale, Retail,Silk,Saree'
+        data['title']="Seth Sarees Collection - Explore Our Extensive Range of Luxurious Silk and Banarasi Sarees - Wholesale and Retail"
+        data['meta_description']='Discover a wide range of luxurious and unique Silk and Banarasi Sarees in Varanasi at wholesale and retail prices. Visit our showroom or shop online now.Visit Seth Sarees showroom or shop online now.'
+        data['meta_tags']='Seth Sarees,Banarasi Sarees, Silk Sarees, Varanasi, Wholesale, Retail,Silk,Saree'
         products = Product.get_all_products()
         data['categories'] = Category.get_all_categories()
     

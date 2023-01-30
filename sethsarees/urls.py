@@ -27,11 +27,12 @@ from store.views.support import show_support
 from store.views.privacy_policy import show_privacy_policy
 from store.views.contact import Contact_Page
 from store.views.detail import Detail
+from store.views.robots import robots
 
 sitemaps={
+    '':IndexSitemap,
     'category':CategorySitemap,
     'about':AboutSitemap,
-    '':IndexSitemap,
     'contact':ContactSitemap,
     'privacy_policy':PrivacyPolicySitemap,
     'support':SupportSitemap,
@@ -50,6 +51,6 @@ urlpatterns = [
     path('about',show_about,name='about'),
     path('contact',Contact_Page.as_view(),name='contact'),
     path('<int:category_id>/<int:product_id>/', Detail.as_view(),name="detail"),
-    
+    path('robots.txt', robots),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

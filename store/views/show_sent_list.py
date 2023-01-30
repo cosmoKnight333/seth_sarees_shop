@@ -25,5 +25,5 @@ def show_sent_list(request):
     data['wishlist']=wishlist  
     data['title']='Wishlist - See What '+customer_to_show.first_name+ ' is Loving'
     data['meta_description']='Discover what other users are loving from our collection of traditional Banarasi sarees in Varanasi by browsing their wishlists. Get inspiration and ideas for your own wishlist.'
-    data['meta_tags']='Wishlist, see what others are loving, Banarasi sarees, Varanasi'  
+    data['meta_tags']='Seth Sarees,Wishlist, see what others are loving, Banarasi sarees, Varanasi'  
     return render(request,'show_sent_list.html',data)
