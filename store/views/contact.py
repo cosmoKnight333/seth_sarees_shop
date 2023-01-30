@@ -19,7 +19,7 @@ class Contact_Page(View):
         data['error_msg'] = error_msg
         data['meta_description']='At Seth Sarees store, we eagerly await the opportunity to hear from our esteemed customers. If you have any inquiries, comments, or concerns, please do not hesitate to contact us. Our team is available around the clock to promptly respond to your message. We are grateful for your patronage and look forward to assisting you in any way possible.'
         data['meta_tags']='Seth Sarees,Contact, inquiries, comments, concerns, customer service, patronage'
-        data['title']="Contact Seth Sarees - Visit Store or Get in Touch for Wholesale and Retail Orders"
+        data['title']="Contact Seth Sarees - Wholesale & Retail Orders - Visit Store or Get in Touch"
         return render(request, 'contact.html', data)
 
     def post(self, request):

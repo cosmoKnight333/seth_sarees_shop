@@ -5,15 +5,15 @@ from django.urls import reverse
 from store.models.contact import Contact
 
 class CategorySitemap(Sitemap):
-    changefreq='weekly'
+    changefreq='hourly'
     priority=0.85
     def items(self):
-        return Category.objects.all()
+        return Category.objects.all().order_by('id')
 class ProductSitemap(Sitemap):
-    changefreq='weekly'
+    changefreq='hourly'
     priority=0.70
     def items(self):
-        return Product.objects.all()
+        return Product.objects.all().order_by('id')
 
 class AboutSitemap(Sitemap):
     changefreq='weekly'
@@ -22,6 +22,7 @@ class AboutSitemap(Sitemap):
         return ['about']
     def location(self, item):
         return reverse(item)
+    
     
 class IndexSitemap(Sitemap):
     changefreq='weekly'

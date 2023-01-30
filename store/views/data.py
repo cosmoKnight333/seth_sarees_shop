@@ -8,5 +8,4 @@ initial_data = {
         'addressRegion':'Uttar Pradesh',
         'postalCode':'221001',
         'categories': Category.get_all_categories(),
-        
 }

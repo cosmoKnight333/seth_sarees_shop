@@ -20,7 +20,8 @@ class Product(models.Model):
     def __str__(self):
         return self.name 
     def get_absolute_url(self):
-        return '/'+str(self.category.id)+'/'+str(self.id)+''
+        return '/store/category/'+str(self.category.id)+'/sarees/'+str(self.id)+'/detail'
+        
     @staticmethod
     def get_all_products():
         return Product.objects.all()

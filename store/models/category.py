@@ -13,7 +13,8 @@ class Category(models.Model):
     def get_all_categories():
         return Category.objects.all()
     def get_absolute_url(self):
-        return '/'+str(self.id)+'/'
+        #/store/category/1/sarees
+        return '/store/category/'+str(self.id)+'/sarees'
     
     def __str__(self):
         return self.name

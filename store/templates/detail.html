@@ -174,7 +174,24 @@
     
 
     <!-- Products End here -->
-
+    {%for product in products%}
+    <script>
+        {%if product.in_wishlist%}
+            document.querySelector(".wishlist-form-for-removing-{{product.id}}").style.display = "block";
+            document.querySelector(".wishlist-form-{{product.id}}").style.display = "none";
+        {%else%}
+            document.querySelector(".wishlist-form-for-removing-{{product.id}}").style.display = "none";
+            document.querySelector(".wishlist-form-{{product.id}}").style.display = "block";
+        {% endif %}
+    </script>
+    {%endfor%}
+    <script>
+        document.querySelectorAll(".wishlist-btn").forEach(function(btn) {
+            btn.addEventListener("click", function(){
+                this.querySelector(".heart-icon").classList.toggle("fa-2x");
+            });
+        });
+    </script>
     <script>
         {%if product_obj.in_wishlist%}
             document.querySelector(".detail-wishlist-form-for-removing-{{product_obj.id}}").style.display = "block";
@@ -182,10 +199,136 @@
         {%else%}
             document.querySelector(".detail-wishlist-form-for-removing-{{product_obj.id}}").style.display = "none";
             document.querySelector(".detail-wishlist-form-{{product_obj.id}}").style.display = "block";
+    
         {% endif %}
     </script>
+    <script>
+        $(document).ready(function() {
+            $('.detail-wishlist-form-{{product_obj.id}}').on('submit', function(e) {
+                e.preventDefault(); // prevent form from submitting as usual
+        
+                var form = $(this);
+                var url = form.attr('action'); // get form action
+                var data = form.serialize(); // get form data as an object
+                // make ajax request to add product to wishlist
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: data,
+                    success: function(response){
+                        if(response.status=='already_added') {
+                            $('.wishlist-form-content-{{product.id}}').html('<i class="fas fa-heart fa-1x ml-1 text-lg"></i><span class="ml-2 text-lg">Already in Wishlist</span>');
+                        }
+                        else if(response.status=='added') {
+                            var badgeValue = parseInt($('.badge').text().split(":")[1]);
+                            badgeValue += 1;
+                            document.querySelector(".detail-wishlist-form-for-removing-{{product_obj.id}}").style.display = "block";
+                            document.querySelector(".detail-wishlist-form-{{product_obj.id}}").style.display = "none";
+                            $('.badge').html("Wishlist: " + badgeValue);
+                        }
+                        else{
+                            $(document).ready(function() {
+                                $('#loginModal').modal('show');
+                            });
+                        }
+                        window.location.href = next;
+                    },
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.detail-wishlist-form-for-removing-{{product_obj.id}}').on('submit', function(e) {
+                e.preventDefault(); // prevent form from submitting as usual
+                var form = $(this);
+                var url = form.attr('action'); // get form action
+                var data = form.serialize(); 
+        
+                // make ajax request to remove product from wishlist
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: data,
+                    success: function(response){
+                        document.querySelector(".detail-wishlist-form-for-removing-{{product_obj.id}}").style.display = "none";
+                        document.querySelector(".detail-wishlist-form-{{product_obj.id}}").style.display = "block";
+                        var badgeValue = parseInt($('.badge').text().split(":")[1]);
+                        badgeValue -= 1;
+                        $('.badge').html("Wishlist: " + badgeValue);
 
+                    },
+                });
+            });
+        });
 
+        </script>
+
+        {%for product in products%}
+        <script>
+            $(document).ready(function() {
+                $('.wishlist-form-{{product.id}}').on('submit', function(e) {
+                    e.preventDefault(); // prevent form from submitting as usual
+            
+                    var form = $(this);
+                    var url = form.attr('action'); // get form action
+                    var data = form.serialize(); // get form data as an object
+                    // make ajax request to add product to wishlist
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: data,
+                        success: function(response){
+                            if(response.status=='already_added') {
+        
+                            }
+                            else if(response.status=='added') {
+                                var badgeValue = parseInt($('.badge').text().split(":")[1]);
+                                badgeValue += 1;
+                                $('.badge').html("Wishlist: " + badgeValue);
+        
+                                document.querySelector(".wishlist-form-for-removing-{{product.id}}").style.display = "block";
+                                document.querySelector(".wishlist-form-{{product.id}}").style.display = "none";
+                            }
+                            else{
+                                $(document).ready(function() {
+                                    $('#loginModal').modal('show');
+                                });
+                            }
+                            window.location.href = next;
+                        },
+                    });
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('.wishlist-form-for-removing-{{product.id}}').on('submit', function(e) {
+                    e.preventDefault();
+                    var form = $(this);
+                    var carouselItem = form.closest('.product-item');
+                    var removeBtn = carouselItem.find('.wishlist-form-for-removing-{{product.id}}');
+                    var addBtn = carouselItem.find('.wishlist-form-{{product.id}}');
+                    //make ajax request to remove product from wishlist
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: data,
+                        success: function(response){
+                           removeBtn.hide();
+                           addBtn.show();
+                           var badgeValue = parseInt($('.badge').text().split(":")[1]);
+                           badgeValue -= 1;
+                           $('.badge').html("Wishlist: " + badgeValue);
+                        },
+                    });
+                 });
+            });
+        
+            </script>
+        
+        {%endfor%}
+        
 {% endblock content%}
 
 {% block category_nav %}

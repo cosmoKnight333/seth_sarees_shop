@@ -28,7 +28,7 @@ def show_wishlist(request):
         data['wishlist']=wishlist
         data['customer_name']=customer.first_name+' '+customer.last_name
         data['wishlist_len']=wishlist_len
-        data['title']="My Wishlist - Keep track of your favorite Silk and Banarasi Sarees in Varanasi"
+        data['title']="My Wishlist - Favorite Silk and Banarasi Sarees from Seth Sarees"
         data['meta_description']='Keep track of your favorite sarees from our collection of traditional Banarasi sarees in Varanasi. Create and manage your own wishlist for easy access and future reference.'
         data['meta_tags']='Wishlist, save favorite sarees, user, Banarasi sarees, silk sarees, printed sarees, Varanasi'
 

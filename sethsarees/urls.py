@@ -15,19 +15,30 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from .sitemaps import CategorySitemap,AboutSitemap,IndexSitemap,ContactSitemap,SupportSitemap,PrivacyPolicySitemap,ProductSitemap
+from store.views.home import index,logout
 from store.views.category import show_category
+from store.views.search import search
+from store.views.robots import robots
+from store.views.search import search_suggestions
 from store.views.about import show_about
-from store.views.home import index
 from store.views.support import show_support
 from store.views.privacy_policy import show_privacy_policy
 from store.views.contact import Contact_Page
+from store.views.forgot_password import Forgot_Password
+from store.views.change_password import Change_Password
+from store.views.login import Login
+from store.views.signup import Signup
+from store.views.change_info import Change_Info
 from store.views.detail import Detail
-from store.views.robots import robots
+from store.views.addtowishlist import addtowishlist
+from store.views.addtowishlist import removeitem
+from store.views.wishlist import show_wishlist
+from store.views.show_sent_list import show_sent_list
+from store.views.take_to_change_password import Take_To_Change_Password
 
 sitemaps={
     '':IndexSitemap,
@@ -41,16 +52,31 @@ sitemaps={
 }
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('store.urls')),
+    path('store/',include('store.urls')),
     path('sitemap.xml',sitemap,{'sitemaps':sitemaps}),
-    path('<int:category_id>/',show_category,name='category'),
+    path('robots.txt', robots),
+    path('search',search),
+    path('search-suggestions',search_suggestions),
+    path('wishlist',show_wishlist),
+    path('add-to-wishlist',addtowishlist),
     path('about',show_about,name='about'),
     path('',index,name='index'),
-    path('privacy_policy',show_privacy_policy,name='privacy_policy'),
+    path('privacy-policy',show_privacy_policy,name='privacy_policy'),
     path('support',show_support,name='support'),
     path('about',show_about,name='about'),
     path('contact',Contact_Page.as_view(),name='contact'),
-    path('<int:category_id>/<int:product_id>/', Detail.as_view(),name="detail"),
-    path('robots.txt', robots),
+    path('remove-item',removeitem),
+    path('contact',Contact_Page.as_view()),
+    path('forgot-password',Forgot_Password.as_view()),
+    path('change_password',Change_Password.as_view()),
+    path('take-to-change-password',Take_To_Change_Password.as_view()),
+    path('login',Login.as_view(),name='login'),
+    path('signup',Signup.as_view(),name='signup'),
+    path('change_info',Change_Info.as_view(),name='change_info'),
+    path('show-sent-list',show_sent_list),
+    path('logout',logout),
+    path('store/category/<int:category_id>/sarees', show_category, name='category'),
+    path('store/category/<int:category_id>/sarees/<int:product_id>/detail', Detail.as_view(),name="detail"),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
