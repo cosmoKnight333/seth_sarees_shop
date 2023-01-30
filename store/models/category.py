@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
@@ -11,6 +12,8 @@ class Category(models.Model):
     @staticmethod
     def get_all_categories():
         return Category.objects.all()
+    def get_absolute_url(self):
+        return '/'+str(self.id)+'/'
     
     def __str__(self):
         return self.name

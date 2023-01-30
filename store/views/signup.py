@@ -14,7 +14,7 @@ def email_exists(email):
     regex = r'^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
     return bool(re.search(regex, email))
 def send_welcome_email(user_email):
-    subject = 'Password Reset OTP'
+    subject = 'Welcome to Seth Sarees!'
     message = render_to_string('welcome_email.html',)
     send_mail(subject, '', 'sethsarees@gmail.com', [user_email], html_message=message)
 

@@ -8,7 +8,7 @@
 </style>
 
     <!-- Shop Detail Start -->
-    <div class="container-fluid py-lg-5  py-md-2">
+    <div class="container-fluid pt-lg-5  pt-md-2 pb-5">
         <div class="row px-lg-5  ">
             <div class="col-lg-4 pb-lg-5 pb-md-2">
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-8 py-5">
+            <div class="col-lg-8 py-lg-0 py-5">
                 <h3 class="font-weight-semi-bold">{{product_obj.name}}</h3>
                 <p class="mb-3 text-justify" >{{product_obj.description}}</p>
                 <p class="text-dark font-weight-medium mb-2 ">Inquire For Other Color Options:</p>
@@ -108,7 +108,7 @@
                 </div>
                 
                 
-                <div class="d-flex pt-2">
+                <div class="d-flex pt-0 pb-lg-5 pb-1">
                     <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
                     <div class="d-inline-flex">
                         <!-- AddToAny BEGIN -->
@@ -149,51 +149,32 @@
 
 
     <!-- Products Start -->
-    <div class="container-fluid py-5">
-        <div class="text-center mb-4">
-            <h2 class="section-title px-5"><span class="px-2">You May Also Like</span></h2>
-        </div>
-        
-        <div class="row px-xl-5">
-            <div class="col">
-                <div class="owl-carousel related-carousel">
-                    {%for product in products%}
-                    <div class="card product-item border-0" style="height:350px">
-                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                            <a href="/{{category_id}}/{{product.id}}" target="_blank"><img class="img-fluid w-100" src="{{product.image.url}}" style="height:300px;" alt=""></a>
-                        </div>
-                        <div class="card-body border-bottom border-left border-right text-center p-0 pt-4 pb-3">
-                            <h6 class="text-truncate mb-3">{{product.name}}</h6>
+    <div class="container-fluid pb-5">
+        <h2 class="text-center mb-4">Similar Products</h2>
+        <div class="row">
+            <div class="col-12 col-md-11 mx-auto">
+                <div class="related-carousel owl-carousel owl-theme">
+                    {% for product in products %}
+                    <div class="card product-card">
+                        <a href="{%url 'detail' category_id=product.category.id product_id=product.id  %}" target="_blank">
+                            <img class="card-img-top img-fluid" src="{{product.image.url}}" alt="{{product.name}}" style="object-fit:cover; height:300px;">
+                        </a>
+                        <div class="card-body text-center">
+                            <h6 class="card-title">{{product.name}}</h6>
                             <div class="d-flex justify-content-center">
                             </div>
                         </div>
-                        
                     </div>
-                    {%endfor%}
-                    
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
+    
+    
+
     <!-- Products End here -->
-    {%for product in products%}
-    <script>
-        {%if product.in_wishlist%}
-            document.querySelector(".wishlist-form-for-removing-{{product.id}}").style.display = "block";
-            document.querySelector(".wishlist-form-{{product.id}}").style.display = "none";
-        {%else%}
-            document.querySelector(".wishlist-form-for-removing-{{product.id}}").style.display = "none";
-            document.querySelector(".wishlist-form-{{product.id}}").style.display = "block";
-        {% endif %}
-    </script>
-    {%endfor%}
-    <script>
-        document.querySelectorAll(".wishlist-btn").forEach(function(btn) {
-            btn.addEventListener("click", function(){
-                this.querySelector(".heart-icon").classList.toggle("fa-2x");
-            });
-        });
-    </script>
+
     <script>
         {%if product_obj.in_wishlist%}
             document.querySelector(".detail-wishlist-form-for-removing-{{product_obj.id}}").style.display = "block";

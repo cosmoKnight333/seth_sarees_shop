@@ -24,7 +24,6 @@ urlpatterns = [
     path('',index,name='homepage'),
     path('search',search),
     path('search-suggestions',search_suggestions),
-    
     path('logout',logout),
     path('wishlist',show_wishlist),
     path('add-to-wishlist',addtowishlist),

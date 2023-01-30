@@ -19,6 +19,8 @@ class Product(models.Model):
     meta_description = models.TextField(default='', null=True, blank=True) 
     def __str__(self):
         return self.name 
+    def get_absolute_url(self):
+        return '/'+str(self.category.id)+'/'+str(self.id)+''
     @staticmethod
     def get_all_products():
         return Product.objects.all()

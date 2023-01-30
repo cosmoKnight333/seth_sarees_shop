@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
+    <style>
+        @media only screen and (min-width: 768px) {
+            .header-bg {
+              min-height: 394px;
+            }
+          }
+          @media only screen and (max-width: 767px) {
+            .header-bg {
+              min-height: 150px;
+            }
+          }
+    </style>
     <!-- Page Header Start -->
-    <div class="container-fluid bg-secondary mb-5" style="padding-top:31px;padding-bottom:30px">
-        <div class="d-flex flex-column justify-content-center align-items-center  text-center" style="min-height: 300px">
+    <div class="container-fluid bg-secondary "  >
+        <div class="d-flex flex-column justify-content-center align-items-center  text-center header-bg" >
             <h2 data-aos="fade-up" class="font-weight-semi-bold  mb-3">
                 {%if not category_id%}
                  Our Aesthetic Collection
@@ -29,19 +40,20 @@
             <div class="row pb-3">
                 {%for product in products%}
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card product-item border-0" style="padding: 30px;">
-                        <div class="card-body border-left border-right border-top text-center  d-flex flex-column align-items-around justify-content-center" style="height:350px;">
-                            <a href="/{{product.category.id}}/{{product.id}}" target="_blank">
+
+                    <div class="card product-item border-0  mx-4 my-3 " >
+                        <div class="card-body border-left border-right border-top text-center  d-flex flex-column align-items-around justify-content-center pb-0" style="height:350px;">
+                            <a href="{%url 'detail' category_id=product.category.id product_id=product.id  %}" target="_blank">
                                 <div class="product-img position-relative overflow-hidden bg-transparent  p-0">
-                                    <img class="img-fluid w-100" src="{{product.image.url}}" alt="" style="height:260px; object-fit: contain">
+                                    <img class="img-fluid w-100" src="{{product.image.url}}" alt="" style="height:260px; object-fit: contain; width:100%;">
                                 </div>
                             </a>
-                            <h6 class="text-truncate mt-3">{{product.name}}
-
+                            <h6 class="text-truncate mt-3">
+                                {{product.name}}
                             </h6>
                         </div>
                         <div class="card-footer d-flex justify-content-between bg-light border">
-                            <a href="/{{product.category.id}}/{{product.id}}" target="_blank" class="btn btn-sm text-dark p-0">
+                            <a href="{% url 'detail' category_id=product.category.id product_id=product.id  %}" target="_blank" class="btn btn-sm text-dark p-0">
                                 <i class="fas fa-eye text-primary mr-1"></i>View Detail
                             </a>
                             <form action="/add-to-wishlist" method="POST" class="wishlist-form-{{product.id}}">
@@ -49,7 +61,7 @@
                                 <input type="hidden" name="next" value="{{ request.build_absolute_uri }}">     
                                 <input type="hidden" name="product" value="{{ product.id }}">     
                                 <button type="submit" class="btn btn-sm text-dark add-to-cart-btn p-0" id="wishlist-btn-{{product.id}}">
-                                    <i class="far fa-heart text-primary mr-1" id="heart-icon-{{product.id}}"></i> Add To Wishlist
+                                    <i class="far fa-heart  text-primary mr-1" id="heart-icon-{{product.id}}"></i> Add To Wishlist
                                 </button>
                             </form>
                             <form action="/remove-item" method="POST" class="wishlist-form-for-removing-{{product.id}}">

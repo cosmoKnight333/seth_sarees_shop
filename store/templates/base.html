@@ -107,7 +107,8 @@
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a href='/' class="text-decoration-none">
-                    <h1 class="m-2 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Seth</span>Sarees</h1>
+                    <h1 class="mb-4 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Seth</span>Sarees</h1>
+
                 </a>
             </div>
             <div class="col-lg-6 col-7 text-left pr-0 mr-0">
@@ -140,7 +141,7 @@
     <!-- Topbar End -->
 
     <!-- Navbar Start -->
-    <div class="container-fluid mb-5">
+    <div class="container-fluid mb-3">
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
@@ -161,7 +162,7 @@
                             </div>
                         </div> {% endcomment %}
                         {%for category in categories%}
-                            <a href="/{{category.id}}" class="nav-item nav-link">{{category.name}}</a>
+                            <a href="{% url 'category' category.id %}" class="nav-item nav-link">{{category.name}}</a>
                         {%endfor%}
 
                         </div>
@@ -179,12 +180,12 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="/" class="nav-item nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
                             <a href="/about" class="nav-item nav-link {% if request.path == '/about' %}active{% endif %}">About</a>
-                            <a href="/0" class="nav-item nav-link {% if request.path == '/category' %}active{% endif %}">All Sarees</a>
+                            <a href="/0" class="nav-item nav-link  {% if category_id is defined and category_id == 0  %} active {% endif %}">All Sarees</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Categories</a>
                                 <div class="dropdown-menu rounded-0 m-0">
                                     {%for category in categories%}
-                                        <a href="/{{category.id}}" class="dropdown-item">{{category.name}}</a>
+                                        <a href="{% url 'category' category.id %}" class="dropdown-item">{{category.name}}</a>
                                      {%endfor%}
                                 
                                 
@@ -289,7 +290,7 @@
               </div>
             <div class="modal-body">
               <!-- Login form goes here -->
-               <form action="/signup" method="post" name="signup">
+               <form action="/signup" method="post" name="signup" id="signupform">
                             {%csrf_token%}
                             {%if request.GET.signup_error_msg%}
                             <div class="alert alert-danger text-center "   role="alert">
@@ -316,8 +317,8 @@
                                     required="required" data-validation-required-message="Please enter your Email" />
                                 <p class="help-block text-danger"></p>
                                 </div>
-
                               <div class="control-group d-flex flex-row align-items-center justify-content-center">
+                                
                                 <select id="country-code" name="country-code" class=" my-1 mx-2 form-control form-control-sm px-0" style="height:50px;width:150px;padding:0px">
                                     <option value="+91" style="font-size: small;">+91 (India)</option>
                                     <option value="+1" style="font-size: small;">+1 (USA)</option>
@@ -334,12 +335,13 @@
                                   
                             </div>
                        
-                              <div class="control-group">
-                                  <input type="password" class="form-control m-2 p-3" name="password" placeholder="Password"
-                                      required="required" data-validation-required-message="Please enter a Password" />
-                                  <p class="help-block text-danger"></p>
+                            <div class="control-group">
+                                <input type="password" class="form-control m-2 p-3" name="password" id="password-signup" placeholder="Password"
+                                  required="required" data-validation-required-message="Please enter a Password" />
+                                <div id="passwordError" class="text-danger px-2 text-justify mx-3 mb-2 pb-3" ></div>
                               </div>
-                              <div class="form-group d-flex px-2 text-justify flex-row justify-content-center">
+                              
+                            <div class="form-group d-flex px-2 text-justify flex-row justify-content-center">
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="conditionsCheck" required>
                                     <label class="form-check-label" for="conditionsCheck">By continuing, you agree to abide by our <a href="/privacy_policy">terms of use and privacy policy</a></label>
@@ -489,7 +491,7 @@
                         <div class="d-flex flex-column justify-content-start">
                             <a class="text-dark mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Home</a>
                             <a class="text-dark mb-2" href="/about"><i class="fa fa-angle-right mr-2"></i>About</a>
-                            <a class="text-dark mb-2" href="/0"><i class="fa fa-angle-right mr-2"></i>All Sarees</a>
+                            <a class="text-dark mb-2" href="{% url 'category' 0 %}"><i class="fa fa-angle-right mr-2"></i>All Sarees</a>
                             <a class="text-dark mb-2" href="/wishlist"><i class="fa fa-angle-right mr-2"></i>Wishlist</a>
                             <a class="text-dark mb-2" href="/contact"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             <a class="text-dark mb-2" target="_blank" href="/support"><i class="fa fa-angle-right mr-2"></i>Support</a>
@@ -638,4 +640,35 @@
             $(".searchForm").submit();
         });
     </script>
+
+    <script>
+        function validatePassword(password) {
+          // define a regex pattern to check for strong password
+          var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+      
+          // check if password matches the pattern
+          if (!strongRegex.test(password)) {
+            // if not, display an error message
+            document.getElementById("passwordError").innerHTML = "Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters.";
+            return false;
+          } else {
+            // if password is strong, clear any error message
+            document.getElementById("passwordError").innerHTML = "";
+            return true;
+          }
+        }
+      
+        // add event listener to password input
+        document.getElementById("password").addEventListener("input", function() {
+          validatePassword(this.value);
+        });
+      
+        // add event listener to form submit
+        document.getElementById("signupform").addEventListener("submit", function(e) {
+          if (!validatePassword(document.getElementById("password").value)) {
+            e.preventDefault();
+          }
+        });
+        $(".sticky-btn").hide();
+      </script>
 </body>

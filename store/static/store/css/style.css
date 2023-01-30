@@ -9551,13 +9551,16 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .cat-item:hover .cat-img img,
-.product-item:hover .product-img img {
+.product-item:hover .product-img img,
+.cat-item:active .cat-img img,
+.product-item:active .product-img img {
   transform: scale(1.2);
 }
 
 .product-item .btn:hover {
   color: #D19C97 !important;
 }
+
 
 .contact-form .help-block ul {
   margin: 0;
