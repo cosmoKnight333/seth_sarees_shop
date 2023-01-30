@@ -596,7 +596,7 @@
     <script src="{% static '/store/mail/contact.js' %}"></script>
 
     <!-- Template Javascript -->
-    <script src="{% static '/store/js/main.js' %}"></script>
+    <script src="{% static '/store/js/min.js' %}"></script>
     
 
     <!-- Template Aos -->
@@ -637,66 +637,5 @@
         });
     </script>
     {% endif %}
-    <script>
-        $(document).ready(function() {
-            $("#search").on("keyup", function() {
-                var searchTerm = $(this).val();
-                // Make an AJAX call to the server
-                $.ajax({
-                    type: "GET",
-                    url: "/search-suggestions",
-                    data: {search: searchTerm},
-                    success: function(response) {
-                        var suggestionsList = $("#suggestions-list");
-                        suggestionsList.empty();
-                        // Show the list of suggestions
-                        response.suggestions.forEach(function(suggestion) {
-                            suggestionsList.append("<li>" + suggestion + "</li>");
-                        });
-                        $("#suggestions-list li").click(function(){
-                            $("#search").val($(this).text());
-                            $(".searchForm").submit();
-                        });
-                    }
-                });
-            });
-        });
-    </script>
-    
-    <script>
-        $(document).on('click', '#suggestions-list li', function(){
-            $("#search").val($(this).text());
-            $(".searchForm").submit();
-        });
-    </script>
-
-    <script>
-        function validatePassword(password) {
-          // define a regex pattern to check for strong password
-          var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-      
-          // check if password matches the pattern
-          if (!strongRegex.test(password)) {
-            // if not, display an error message
-            document.getElementById("passwordError").innerHTML = "Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters.";
-            return false;
-          } else {
-            // if password is strong, clear any error message
-            document.getElementById("passwordError").innerHTML = "";
-            return true;
-          }
-        }
-      
-        // add event listener to password input
-        document.getElementById("password-signup").addEventListener("input", function() {
-          validatePassword(this.value);
-        });
-      
-        // add event listener to form submit
-        document.getElementById("signupform").addEventListener("submit", function(e) {
-          if (!validatePassword(document.getElementById("password-signup").value)) {
-            e.preventDefault();
-          }
-        });
-      </script>
+ 
 </body>

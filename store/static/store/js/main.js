@@ -100,5 +100,118 @@
         button.parent().parent().find('input').val(newVal);
     });
     
+    
 })(jQuery);
+function validatePassword(password) {
+    // define a regex pattern to check for strong password
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+
+    // check if password matches the pattern
+    if (!strongRegex.test(password)) {
+      // if not, display an error message
+      document.getElementById("passwordError").innerHTML = "Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters.";
+      return false;
+    } else {
+      // if password is strong, clear any error message
+      document.getElementById("passwordError").innerHTML = "";
+      return true;
+    }
+  }
+
+  // add event listener to password input
+  document.getElementById("password-signup").addEventListener("input", function() {
+    validatePassword(this.value);
+  });
+
+  // add event listener to form submit
+  document.getElementById("signupform").addEventListener("submit", function(e) {
+    if (!validatePassword(document.getElementById("password-signup").value)) {
+      e.preventDefault();
+    }
+  });
+  $(document).on('click', '#suggestions-list li', function(){
+    $("#search").val($(this).text());
+    $(".searchForm").submit();
+});
+$(document).ready(function() {
+    $("#search").on("keyup", function() {
+        var searchTerm = $(this).val();
+        // Make an AJAX call to the server
+        $.ajax({
+            type: "GET",
+            url: "/search-suggestions",
+            data: {search: searchTerm},
+            success: function(response) {
+                var suggestionsList = $("#suggestions-list");
+                suggestionsList.empty();
+                // Show the list of suggestions
+                response.suggestions.forEach(function(suggestion) {
+                    suggestionsList.append("<li>" + suggestion + "</li>");
+                });
+                $("#suggestions-list li").click(function(){
+                    $("#search").val($(this).text());
+                    $(".searchForm").submit();
+                });
+            }
+        });
+    });
+});
+AOS.init({});
+$(document).ready(function() {
+    $('.detail-wishlist-form-{{product_obj.id}}').on('submit', function(e) {
+        e.preventDefault(); // prevent form from submitting as usual
+
+        var form = $(this);
+        var url = form.attr('action'); // get form action
+        var data = form.serialize(); // get form data as an object
+        // make ajax request to add product to wishlist
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            success: function(response){
+                if(response.status=='already_added') {
+                    $('.wishlist-form-content-{{product.id}}').html('<i class="fas fa-heart fa-1x ml-1 text-lg"></i><span class="ml-2 text-lg">Already in Wishlist</span>');
+                }
+                else if(response.status=='added') {
+                    var badgeValue = parseInt($('.badge').text().split(":")[1]);
+                    badgeValue += 1;
+                    document.querySelector(".detail-wishlist-form-for-removing-{{product_obj.id}}").style.display = "block";
+                    document.querySelector(".detail-wishlist-form-{{product_obj.id}}").style.display = "none";
+                    $('.badge').html("Wishlist: " + badgeValue);
+                }
+                else{
+                    $(document).ready(function() {
+                        $('#loginModal').modal('show');
+                    });
+                }
+                window.location.href = next;
+            },
+        });
+    });
+});
+$(document).ready(function() {
+    $('.detail-wishlist-form-for-removing-{{product_obj.id}}').on('submit', function(e) {
+        e.preventDefault(); // prevent form from submitting as usual
+        var form = $(this);
+        var url = form.attr('action'); // get form action
+        var data = form.serialize(); 
+
+        // make ajax request to remove product from wishlist
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            success: function(response){
+                document.querySelector(".detail-wishlist-form-for-removing-{{product_obj.id}}").style.display = "none";
+                document.querySelector(".detail-wishlist-form-{{product_obj.id}}").style.display = "block";
+                var badgeValue = parseInt($('.badge').text().split(":")[1]);
+                badgeValue -= 1;
+                $('.badge').html("Wishlist: " + badgeValue);
+
+            },
+        });
+    });
+});
+
 
