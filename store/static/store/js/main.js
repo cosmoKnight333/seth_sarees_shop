@@ -129,30 +129,31 @@ function validatePassword(password) {
       e.preventDefault();
     }
   });
-  $(document).on('click', '#suggestions-list li', function(){
-    $("#search").val($(this).text());
-    $(".searchForm").submit();
-});
-$(document).ready(function() {
-    $("#search").on("keyup", function() {
-        var searchTerm = $(this).val();
-        // Make an AJAX call to the server
-        $.ajax({
-            type: "GET",
-            url: "/search-suggestions",
-            data: {search: searchTerm},
-            success: function(response) {
-                var suggestionsList = $("#suggestions-list");
-                suggestionsList.empty();
-                // Show the list of suggestions
-                response.suggestions.forEach(function(suggestion) {
-                    suggestionsList.append("<li>" + suggestion + "</li>");
-                });
-                $("#suggestions-list li").click(function(){
-                    $("#search").val($(this).text());
-                    $(".searchForm").submit();
-                });
-            }
+
+    $(document).on('click', '#suggestions-list li', function(){
+        $("#search").val($(this).text());
+        $(".searchForm").submit();
+        });
+    $(document).ready(function() {
+        $("#search").on("keyup", function() {
+            var searchTerm = $(this).val();
+            // Make an AJAX call to the server
+            $.ajax({
+                type: "GET",
+                url: "/search-suggestions",
+                data: {search: searchTerm},
+                success: function(response) {
+                    var suggestionsList = $("#suggestions-list");
+                    suggestionsList.empty();
+                    // Show the list of suggestions
+                    response.suggestions.forEach(function(suggestion) {
+                        suggestionsList.append("<li>" + suggestion + "</li>");
+                    });
+                    $("#suggestions-list li").click(function(){
+                        $("#search").val($(this).text());
+                        $(".searchForm").submit();
+                    });
+                }
+            });
         });
     });
-});

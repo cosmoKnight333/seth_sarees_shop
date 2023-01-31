@@ -72,7 +72,7 @@ urlpatterns = [
     path('take-to-change-password',Take_To_Change_Password.as_view()),
     path('login',Login.as_view(),name='login'),
     path('signup',Signup.as_view(),name='signup'),
-    path('change_info',Change_Info.as_view(),name='change_info'),
+    path('change-info',Change_Info.as_view(),name='change_info'),
     path('show-sent-list',show_sent_list),
     path('logout',logout),
     path('store/category/<int:category_id>/sarees', show_category, name='category'),

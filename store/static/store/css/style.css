@@ -9591,3 +9591,97 @@ a.text-dark:hover, a.text-dark:focus {
 :not(footer) .sticky-btn {
   display: block;
 }
+
+#suggestions-list {
+  list-style: none; /* remove the bullets/dots */
+  position: absolute; /* position the list absolute to the parent element */
+  top: 100%; /* set the top position to 100% of the parent element */
+  left: 0; /* set the left position to 0 */
+  width: 100%; /* set the width to 100% of the parent element */
+  z-index: 2; /* set the z-index to 1 to make sure it appears on top */
+}
+.search-container {
+  position: relative; /* set the position to relative */
+}
+#suggestions-list li {
+  padding: 0.5em 1em; /* add padding to the list items */
+  border-bottom: 1px solid #f5f5f5; /* add a border-bottom to separate the items */
+  transition: background-color 0.2s ease-in-out; /* add a transition for the hover effect */
+  background:white;
+  color:black;
+}
+
+#suggestions-list li:hover {
+  background-color: #f5f5f5; /* change the background color on hover */
+  cursor: pointer; /* change the cursor to a pointer */
+  color:#ba6a62;
+}
+
+.search-submit-btn {
+  border-color:#eeeeee;
+}
+
+.category-header-desktop{
+  height: 65px; margin-top: -1px; padding: 0 30px;
+}
+
+.category-list-desktop{
+  height: 410px ;
+}
+
+.country-code{
+  height:45px;width:150px;padding:0px !important;
+  font-size: small !important;
+}
+.country-code-change-info{
+  height:45px;width:150px;padding:0px !important;
+  font-size: small !important;
+}
+
+.link-black{
+  text-decoration: none !important;
+
+  color:black !important;
+}
+
+.google-map{
+  overflow: hidden;text-align:center
+}
+
+.index-feature-box .d-flex.align-items-center {
+  padding: 30px;
+}
+
+.index-categories-show .cat-item.d-flex.flex-column {
+  padding: 30px;
+  height: 400px;
+}
+
+@media only screen and (min-width: 768px) {
+  .header-bg {
+    min-height: 394px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .header-bg {
+    min-height: 150px;
+  }
+}
+.category-info-img{
+  height:260px; object-fit: contain; width:100%;
+}
+.change-password-container {
+  padding: 0%;
+  margin-top: 0px;
+  }
+  #reach-us-map {
+    text-align: center;
+    overflow: hidden;
+  }
+  
+  #reach-us-map iframe {
+    width: 100%;
+    height: 485px;
+    border: 0;
+    padding-bottom: 15px;
+  }

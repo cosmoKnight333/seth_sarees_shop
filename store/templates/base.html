@@ -20,7 +20,7 @@
         <meta property="og:longitude" content="83.01144118043115">        
         <!-- OG Tag END -->
     <!-- Cannonical tags-->
-    <link rel="alternate" hreflang="en" href="https://cosmoknight.pythonanywhere.com/support"/>
+    <link rel="alternate" hreflang="en" href="/support"/>
     {% if request.get_full_path %}
     <link rel="canonical" href="{{ request.build_absolute_uri }}"/>
     {% endif %}
@@ -59,31 +59,7 @@
     <link href="{% static '/store/css/style.css' %}" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
-        #suggestions-list {
-            list-style: none; /* remove the bullets/dots */
-            position: absolute; /* position the list absolute to the parent element */
-            top: 100%; /* set the top position to 100% of the parent element */
-            left: 0; /* set the left position to 0 */
-            width: 100%; /* set the width to 100% of the parent element */
-            z-index: 2; /* set the z-index to 1 to make sure it appears on top */
-        }
-        .search-container {
-            position: relative; /* set the position to relative */
-        }
-        #suggestions-list li {
-            padding: 0.5em 1em; /* add padding to the list items */
-            border-bottom: 1px solid #f5f5f5; /* add a border-bottom to separate the items */
-            transition: background-color 0.2s ease-in-out; /* add a transition for the hover effect */
-            background:white;
-            color:black;
-        }
-        
-        #suggestions-list li:hover {
-            background-color: #f5f5f5; /* change the background color on hover */
-            cursor: pointer; /* change the cursor to a pointer */
-            color:#ba6a62;
-        }
-        
+
     </style>
 
 
@@ -95,23 +71,23 @@
         <div class="row bg-secondary py-2 px-xl-5 justify-content-between">
             <div class="col-6">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-dark" target="_blank" href="https://wa.me/{{phone_no}}?text=Hello,+I+needed+some+help+related+to+your+store">Help</a>
+                    <a class="text-dark" title="Chat for Help" target="_blank" href="https://wa.me/{{phone_no}}?text=Hello,+I+needed+some+help+related+to+your+store">Help</a>
                     <span class="text-muted px-2">|</span>
-                    <a class="text-dark" target="_blank" href="/support">Support</a>
+                    <a class="text-dark" title="Visit Our Support Page" target="_blank" href="/support">Support</a>
                 </div>
             </div>
             <div class="col-6 d-flex justify-content-end">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-dark px-2" href="https://www.facebook.com/profile.php?id=100089091092224" target="_blank">
+                    <a title="Explore Our Facebook Presence" class="text-dark px-2" href="https://www.facebook.com/profile.php?id=100089091092224" target="_blank">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a class="text-dark px-2" href="https://www.instagram.com/seth_sarees/" target="_blank">
+                    <a title="Explore Our Instagram Presence" class="text-dark px-2" href="https://www.instagram.com/seth_sarees/" target="_blank">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a class="text-dark px-2" href="https://wa.me/{{phone_no}}?text=Hello,+I+am+interested+in+knowing+more+about+your+Store" target="_blank">
+                    <a  title="Chat With Us" class="text-dark px-2" href="https://wa.me/{{phone_no}}?text=Hello,+I+am+interested+in+knowing+more+about+your+Store" target="_blank">
                         <i class="fab fa-whatsapp"></i>
                     </a>
-                    <a class="text-dark pl-2" href="" target="_blank">
+                    <a  title="Chat With Us" class="text-dark pl-2" href="" target="_blank">
                         <i class="fab fa-telegram"></i>
                     </a>
                 </div>
@@ -120,9 +96,8 @@
         
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <a href='/' class="text-decoration-none">
+                <a title="Seth Sarees" href='/' class="text-decoration-none">
                     <h1 class="mb-4 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Seth</span>Sarees</h1>
-
                 </a>
             </div>
             <div class="col-lg-6 col-7 text-left pr-0 mr-0">
@@ -131,7 +106,7 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control border-right-0" placeholder="Search Product" name="search" id="search" autocomplete="off">
                                             <div class="input-group-append">
-                                                <button class="btn btn-outline-primary  rounded-0" type="submit" autocomplete="off" style="border-color:#eeeeee;">
+                                                <button name="search-submit-btn" class="btn search-submit-btn btn-outline-primary border rounded-0" type="submit" autocomplete="off" >
                                                     <i class="fa fa-search" ></i>
                                                 </button>
                                             </div>
@@ -144,7 +119,7 @@
 
             </div>
             <div class="col-lg-3 col-5 text-right">
-                <a href="/wishlist?next={{ request.get_full_path }}" class="btn border ">
+                <a title="View Your Wishlist" href="/wishlist?next={{ request.get_full_path }}" class="btn border ">
                     <i class="fas fa-heart text-primary"></i>
                     <span class="badge">Wishlist: {{wishlist_len}}</span>
                 </a>
@@ -158,7 +133,7 @@
     <div class="container-fluid mb-3 ">
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                <a title="Discover Our Categories" class="btn category-header-desktop shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" >
                     <h6 class="m-0">Categories</h6>
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
@@ -166,7 +141,7 @@
                 
                 {% endblock index_nav %}
                 {% block category_nav %}{% endblock category_nav %}
-                    <div class="navbar-nav w-100 overflow-hidden " style="height: 410px ; " >
+                    <div class="navbar-nav w-100 overflow-hidden category-list-desktop" >
                         {% comment %} <div class="nav-item dropdown">
                             <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
@@ -177,7 +152,7 @@
                         </div> {% endcomment %}
                         {%for category in categories%}
                         
-                        <a href="{% url 'category' category.id %}" class="nav-item nav-link {% if category_id %} {% if category_id == category.id and 'store' in request.path %}active{% endif %} {% endif %}" >
+                        <a href="{% url 'category' category.id %}" title="Explore {{category.name}}" class="nav-item nav-link {% if category_id %} {% if category_id == category.id and 'store' in request.path %}active{% endif %} {% endif %}" >
                         {{category.name}}
                         </a>
                         {%endfor%}
@@ -186,7 +161,7 @@
             </div>
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-                    <a href="/" class="text-decoration-none d-block d-lg-none">
+                    <a title="Seth Sarees" href="/" class="text-decoration-none d-block d-lg-none">
                         <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Seth</span>Sarees</h1>
                     </a>
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -195,19 +170,19 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="/" class="nav-item nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
-                            <a href="/about" class="nav-item nav-link {% if request.path == '/about' %}active{% endif %}">About</a>
-                            <a href="/store" class="nav-item nav-link  {%if request.path == '/store/'  %} active {% endif %}">All Sarees </a>
+                            <a title="Uncover Our Story" href="/about" class="nav-item nav-link {% if request.path == '/about' %}active{% endif %}">About</a>
+                            <a title="Peruse Our Collection" href="/store" class="nav-item nav-link  {%if request.path == '/store/'  %} active {% endif %}">All Sarees </a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Categories</a>
                                 <div class="dropdown-menu rounded-0 m-0">
                                     {%for category in categories%}
-                                        <a href="{% url 'category' category.id %}" class="dropdown-item {% if category_id %} {% if category_id == category.id and 'store' in request.path %}active{% endif %} {% endif %}">{{category.name}}</a>
+                                        <a title="Explore {{category.name}}" href="{% url 'category' category.id %}" class="dropdown-item {% if category_id %} {% if category_id == category.id and 'store' in request.path %}active{% endif %} {% endif %}">{{category.name}}</a>
                                      {%endfor%}
                                 
                                 
                                 </div>
                             </div>
-                            <a href="/contact" class="nav-item nav-link {% if request.path == '/contact' %}active{% endif %}">Contact</a>
+                            <a title="Connect with Us" href="/contact" class="nav-item nav-link {% if request.path == '/contact' %}active{% endif %}">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                             {%if not request.session.customer%}
@@ -220,10 +195,10 @@
                             
                             {%else%}
                             <div class="nav-item nav-link" style="text-decoration:none">
-                                <span style="color: black;" onmouseover="this.style.color='black';" onmouseout="this.style.color='black';">
+                                <span class="text-dark" onmouseover=" this.style.color='black';" onmouseout="this.style.color='black';">
                                 Hello! 
                                 </span>
-                                <a data-toggle="modal" data-target="#changeInfoModal" style="color: black; text-decoration: none;" onmouseover="this.style.color='#D19C97'; this.style.textDecoration='none';" onmouseout="this.style.color='black'; this.style.textDecoration='none';">{{request.session.customer_first_name}} </a>
+                                <a title="Account Information" data-toggle="modal" data-target="#changeInfoModal"  style="color: black; text-decoration: none;" onmouseover="this.style.color='#D19C97'; this.style.textDecoration='none';" onmouseout=" this.style.color='black'; this.style.textDecoration='none';">{{request.session.customer_first_name}} </a>
                             </div>
                             <span>
                             <a href="/logout?next={{ request.get_full_path|urlencode }}" class="nav-item nav-link">Logout</a>
@@ -335,15 +310,15 @@
                                 </div>
                               <div class="control-group d-flex flex-row align-items-center justify-content-center">
                                 
-                                <select id="country-code" name="country-code" class=" my-1 mx-2 form-control form-control-sm px-0" style="height:50px;width:150px;padding:0px">
-                                    <option value="+91" style="font-size: small;">+91 (India)</option>
-                                    <option value="+1" style="font-size: small;">+1 (USA)</option>
-                                    <option value="+44" style="font-size: small;">+44 (UK)</option>
-                                    <option value="+33" style="font-size: small;">+33 (France)</option>
-                                    <option value="+81" style="font-size: small;">+81 (Japan)</option>
-                                    <option value="+55" style="font-size: small;">+55 (Brazil)</option>
-                                    <option value="+52" style="font-size: small;">+52 (Mexico)</option>
-                                    <option value="+86" style="font-size: small;">+86 (China)</option>
+                                <select id="country-code-change-info" name="country-code" class=" my-1 mx-2 form-control  form-control-sm px-0 " >
+                                    <option value="+91" >+91 (India)</option>
+                                    <option value="+1"  >+1 (USA)</option>
+                                    <option value="+44" >+44 (UK)</option>
+                                    <option value="+33" >+33 (France)</option>
+                                    <option value="+81" >+81 (Japan)</option>
+                                    <option value="+55" >+55 (Brazil)</option>
+                                    <option value="+52" >+52 (Mexico)</option>
+                                    <option value="+86" >+86 (China)</option>
                                   </select>
                                 <input type="text" class="form-control m-1 p-3" id="" name="phone_number" placeholder="Your WhatsApp Number"
                                     required="required" data-validation-required-message="Please enter your WhatsApp Number" />
@@ -391,7 +366,7 @@
             <div class="modal-body">
                 
               <!-- Login form goes here -->
-               <form action="/change_info" method="post" name="signup">
+               <form action="/change-info" method="post" name="signup">
                             {%csrf_token%}
                             {%if request.GET.change_info_error_msg%}
                             <div class="alert alert-danger text-center "   role="alert">
@@ -401,7 +376,7 @@
                             </div>
                             {%endif%}
                               <input type="hidden" id="custId" name="next" value="{{ request.get_full_path }}">
-                              <div class="form-group mb-3 pb-2" style="border-bottom: 1px solid grey">
+                              <div class="form-group mb-3 pb-2 border" >
                                 <label for="password">Password:</label>
                                 <input type="password" class="form-control" name="password" placeholder="Password" required="required" data-validation-required-message="Please enter a password" />
                                 <small class="form-text text-muted text-center">Password is required to update your account information.</small>
@@ -424,15 +399,15 @@
                                 </div>
 
                                 <div class="control-group d-flex flex-row align-items-center justify-content-center">
-                                    <select id="country-code" name="country-code" class=" m-1 form-control form-control-sm p-0" style="height:50px;width:150px;padding:0px">
-                                        <option value="+91" style="font-size: small;">+91 (India)</option>
-                                        <option value="+1" style="font-size: small;">+1 (USA)</option>
-                                        <option value="+44" style="font-size: small;">+44 (UK)</option>
-                                        <option value="+33" style="font-size: small;">+33 (France)</option>
-                                        <option value="+81" style="font-size: small;">+81 (Japan)</option>
-                                        <option value="+55" style="font-size: small;">+55 (Brazil)</option>
-                                        <option value="+52" style="font-size: small;">+52 (Mexico)</option>
-                                        <option value="+86" style="font-size: small;">+86 (China)</option>
+                                    <select id="" name="country-code" class="country-code m-1 form-control form-control-sm p-0" >
+                                        <option value="+91" >+91 (India)</option>
+                                        <option value="+1"  >+1 (USA)</option>
+                                        <option value="+44" >+44 (UK)</option>
+                                        <option value="+33" >+33 (France)</option>
+                                        <option value="+81" >+81 (Japan)</option>
+                                        <option value="+55" >+55 (Brazil)</option>
+                                        <option value="+52" >+52 (Mexico)</option>
+                                        <option value="+86" >+86 (China)</option>
                                       </select>
                                     <input type="text" class="form-control m-1 p-3" id="" name="phone_number" placeholder="Your WhatsApp Number"
                                         required="required" data-validation-required-message="Please enter your WhatsApp Number" value="{{request.session.customer_phone_number}}" />
@@ -500,7 +475,7 @@
                     <div class="d-flex mb-2">
                       <i class="fa m-0 pt-2 fa-map-marker-alt text-primary mr-3"></i>
                       <div>
-                        <a href="https://www.google.com/search?q=seth%20sarees&oq=seth&aqs=chrome.0.69i59j69i57j69i59j69i60j69i61l2j69i60.1882j0j4&sourceid=chrome&ie=UTF-8&tbs=lf:1,lf_ui:10&tbm=lcl&sxsrf=ALiCzsaSynD1unvd0ebaW9NJ0Fx-3SjwXA:1671827345404&rflfq=1&num=10&rldimm=527673046138865702&lqi=CgtzZXRoIHNhcmVlc0iz8qLwsq6AgAhaHRAAEAEYABgBIgtzZXRoIHNhcmVlcyoGCAIQABABkgEXZGVzaWduZXJfY2xvdGhpbmdfc3RvcmU&phdesc=J3chXqvknqQ&ved=2ahUKEwjjtbGYypD8AhVH03MBHdmAB1gQvS56BAgYEAE&sa=X&rlst=f#rlfi=hd:;si:527673046138865702,l,CgtzZXRoIHNhcmVlc0iz8qLwsq6AgAhaHRAAEAEYABgBIgtzZXRoIHNhcmVlcyoGCAIQABABkgEXZGVzaWduZXJfY2xvdGhpbmdfc3RvcmU,y,J3chXqvknqQ;mv:[[25.6578831,83.0200176],[25.2926608,82.8717667]];tbs:lrf:!1m4!1u3!2m2!3m1!1e1!2m1!1e3!3sIAE,lf:1,lf_ui:10" target="_blank" style="color:black;">
+                        <a title="View on Google Maps" class="link-black" href="https://www.google.com/search?q=seth%20sarees&oq=seth&aqs=chrome.0.69i59j69i57j69i59j69i60j69i61l2j69i60.1882j0j4&sourceid=chrome&ie=UTF-8&tbs=lf:1,lf_ui:10&tbm=lcl&sxsrf=ALiCzsaSynD1unvd0ebaW9NJ0Fx-3SjwXA:1671827345404&rflfq=1&num=10&rldimm=527673046138865702&lqi=CgtzZXRoIHNhcmVlc0iz8qLwsq6AgAhaHRAAEAEYABgBIgtzZXRoIHNhcmVlcyoGCAIQABABkgEXZGVzaWduZXJfY2xvdGhpbmdfc3RvcmU&phdesc=J3chXqvknqQ&ved=2ahUKEwjjtbGYypD8AhVH03MBHdmAB1gQvS56BAgYEAE&sa=X&rlst=f#rlfi=hd:;si:527673046138865702,l,CgtzZXRoIHNhcmVlc0iz8qLwsq6AgAhaHRAAEAEYABgBIgtzZXRoIHNhcmVlcyoGCAIQABABkgEXZGVzaWduZXJfY2xvdGhpbmdfc3RvcmU,y,J3chXqvknqQ;mv:[[25.6578831,83.0200176],[25.2926608,82.8717667]];tbs:lrf:!1m4!1u3!2m2!3m1!1e1!2m1!1e3!3sIAE,lf:1,lf_ui:10" target="_blank" >
                           <span itemprop="streetAddress">{{streetAddress}},</span>
                           <span itemprop="addressLocality">{{addressLocality}}</span> 
                           <span itemprop="addressRegion"> {{addressRegion}}</span> 
@@ -511,13 +486,13 @@
                     <div class="d-flex mb-2">
                       <i class="fa fa-envelope text-primary mr-3"></i>
                       <div>
-                        <a itemprop="email" href="mailto:sethsarees@gmail.com" target="_blank" style="color:black;">{{email}}</a>
+                        <a title="Send an Email" itemprop="email" href="mailto:sethsarees@gmail.com" target="_blank" style="color:black;">{{email}}</a>
                       </div>
                     </div>
                     <div class="d-flex mb-0">
                       <i class="fa fa-phone-alt text-primary mr-3"></i>
                       <div>
-                        <a itemprop="telephone" href="tel:+{{phone_no}}" style="color:black;"> +{{phone_no}}</a>
+                        <a  title="Call Us" itemprop="telephone" href="tel:+{{phone_no}}" class="link-black"> +{{phone_no}}</a>
                       </div>
                     </div>
                     <meta itemprop="description" content="Seth Sarees is a business store website for banarasi sarees located in Varanasi.">
@@ -528,12 +503,12 @@
                     <div class="col-md-4 mb-5">
                         <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-dark mb-2" href="/about"><i class="fa fa-angle-right mr-2"></i>About</a>
-                            <a class="text-dark mb-2" href="/store"><i class="fa fa-angle-right mr-2"></i>All Sarees</a>
-                            <a class="text-dark mb-2" href="/wishlist"><i class="fa fa-angle-right mr-2"></i>Wishlist</a>
-                            <a class="text-dark mb-2" href="/contact"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                            <a class="text-dark mb-2" target="_blank" href="/support"><i class="fa fa-angle-right mr-2"></i>Support</a>
+                            <a  class="text-dark mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a title="Uncover Our Story" class="text-dark mb-2" href="/about"><i class="fa fa-angle-right mr-2"></i>About</a>
+                            <a title="Peruse Our Collection" class="text-dark mb-2" href="/store"><i class="fa fa-angle-right mr-2"></i>All Sarees</a>
+                            <a  title="View Your Wishlist" class="text-dark mb-2" href="/wishlist"><i class="fa fa-angle-right mr-2"></i>Wishlist</a>
+                            <a  title="Connect with Us" class="text-dark mb-2" href="/contact"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                            <a title="Visit Our Support Page" class="text-dark mb-2" target="_blank" href="/support"><i class="fa fa-angle-right mr-2"></i>Support</a>
 
                         </div>
                     </div>
@@ -541,10 +516,9 @@
                         <h5 class="font-weight-bold text-dark mb-4">Top Categories</h5>
                         <div class="d-flex flex-column justify-content-start">
                             {% for category in categories|slice:":6" %}
-                            <a class="text-dark mb-2" href="{% url 'category' category.id %}"><i class="fa fa-angle-right mr-2"></i>{{category}} </a>
+                            <a title="Explore {{category.name}}" class="text-dark mb-2" href="{% url 'category' category.id %}"><i class="fa fa-angle-right mr-2"></i>{{category}} </a>
                             
                             {% endfor %}
-                            
                         </div>
                     </div>
                     <div class="col-md-4 mb-3" >
@@ -563,23 +537,23 @@
             <div class="col-md-6 px-xl-0">
                 <p class="mb-md-0 text-center text-md-left text-dark">
                     <div class=" d-flex align-items-center">
-                        &copy; <a class="px-1 text-dark font-weight-semi-bold" href="#">Seth Sarees</a> All Rights Reserved. 
+                        &copy; <a class="px-1 text-dark font-weight-semi-bold" href="/">Seth Sarees</a> All Rights Reserved. 
                     </div>  
                 </p>  
             </div>
             <div class="col-md-6 px-xl-0">
 
                 <div class="col  text-center  text-sm-right ">
-                        <a class="text-dark px-2" href="https://www.facebook.com/profile.php?id=100089091092224" target="_blank">
+                        <a title="Explore Our Facebook Presence"  class="text-dark px-2" href="https://www.facebook.com/profile.php?id=100089091092224" target="_blank">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a class="text-dark px-2" href="https://www.instagram.com/seth_sarees/" target="_blank">
+                        <a  title="Explore Our Instagram Presence" class="text-dark px-2" href="https://www.instagram.com/seth_sarees/" target="_blank">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a class="text-dark px-2" href="https://wa.me/{{phone_no}}?text=Hello,+I+am+interested+in+knowing+more+about+your+Store" target="_blank">
+                        <a   title="Chat With Us" class="text-dark px-2" href="https://wa.me/{{phone_no}}?text=Hello,+I+am+interested+in+knowing+more+about+your+Store" target="_blank">
                             <i class="fab fa-whatsapp"></i>
                         </a>
-                        <a class="text-dark pl-2" href="">
+                        <a  title="Chat With Us" class="text-dark pl-2" href="">
                             <i class="fab fa-telegram"></i>
                         </a>
                 </div>
@@ -592,7 +566,6 @@
     {% if  not request.GET.signup_error_msg%}
     <button   class="btn btn-primary sticky-btn" onclick="window.location.href='tel:+{{phone_no}}'">Call-Us <span class="pl-1"><i class="fa fa-phone" ></i></span></button>
     {%endif%}
-
     <!-- Back to Top -->
 
     <!-- JavaScript Libraries -->
@@ -604,7 +577,6 @@
 
     <!-- Contact Javascript File -->
     <script src="{% static '/store/mail/jqBootstrapValidation.min.js' %}"></script>
-    <script src="{% static '/store/mail/contact.js' %}"></script>
 
     <!-- Template Javascript -->
     <script src="{% static '/store/js/main.js' %}"></script>
@@ -616,37 +588,31 @@
     <script>
         AOS.init({});
     </script>
+    <script>
 
     {% if request.GET.signup_error_msg  %}
-    <script>
         $(document).ready(function() {
             $('#signupModal').modal('show');
         });
-    </script>
     {% endif %}
 
     {% if request.GET.is_in_wishlist  %}
-    <script>
         $(document).ready(function() {
             $('#itemAlreadyInWishlistModal').modal('show');
         });
-    </script>
     {% endif %}
 
     {% if request.GET.error_msg  %}
-    <script>
         $(document).ready(function() {
             $('#loginModal').modal('show');
         });
-    </script>
     {% endif %}
 
     {% if request.GET.change_info_error_msg  %}
-    <script>
         $(document).ready(function() {
             $('#changeInfoModal').modal('show');
         });
-    </script>
     {% endif %}
- 
+</script>
+
 </body>
