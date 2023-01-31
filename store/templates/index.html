@@ -54,28 +54,27 @@
         <!-- Featured Start -->
         <div class="container-fluid pt-5">
             <div class="row px-xl-5 pb-3">
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 index-feature-box">
-                    <div class="d-flex align-items-center border mb-4">
-                      <div class="fa fa-2x fa-check text-primary m-0 mr-3"></div>
-                      <h5 class="font-weight-semi-bold m-0">Genuine Product</h5>
+                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="d-flex align-items-center border mb-4"  style="padding: 30px;">
+                        <div class="fa fa-2x fa-check text-primary m-0 mr-3"></div>
+                        <h5 class="font-weight-semi-bold m-0">Genuine Product</h5>
                     </div>
-                  </div>
-                  
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 index-feature-box">
-                    <div class="d-flex align-items-center border mb-4"  >
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="d-flex align-items-center border mb-4"  style="padding: 30px;">
                         <i class=""></i>
                         <div class="fa fa-2x fa-shipping-fast text-primary m-0 mr-2"></div>
                         <h5 class="font-weight-semi-bold m-0">Wholesale Rate</h5>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 index-feature-box">
-                    <div class="d-flex align-items-center border mb-4"  >
+                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="d-flex align-items-center border mb-4"  style="padding: 30px;">
                         <div class="fas fa-2x fa-drafting-compass text-primary m-0 mr-3"></div>
                         <h5 class="font-weight-semi-bold m-0">Exquisite Designs</h5>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 index-feature-box">
-                    <div class="d-flex align-items-center border mb-4"  >
+                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="d-flex align-items-center border mb-4"  style="padding: 30px;">
                         <div class="fa fa-2x fa-phone-volume text-primary m-0 mr-3"></div>
                         <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
                     </div>
@@ -95,16 +94,17 @@
         <div class="row px-xl-5 pb-3">
             
             {% for category in categories|slice:":9" %}
-            <div class="col-lg-4 col-md-6 pb-1 index-categories-show" data-aos="slide-up">
-                <div class="cat-item d-flex flex-column border mb-4">
-                  <p class="text-right">10 Products</p>
-                  <a href="{% url 'category' category.id %}" class="cat-img position-relative overflow-hidden mb-3">
-                    <img class="img-fluid ratio ratio-21x9"  src="{{category.image.url}}" alt="{{category.alt_text}}">
-                  </a>
-                  <h5 class="font-weight-semi-bold m-0">{{category.name}}</h5>
+            <div class="col-lg-4 col-md-6 pb-1" data-aos="slide-up">
+                <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px; height: 400px">
+                    <p class="text-right">10 Products</p>
+                    {% comment %} no of products with given category {% endcomment %}
+                    
+                    <a href="{% url 'category' category.id %}" class="cat-img position-relative overflow-hidden mb-3">
+                        <img class="img-fluid ratio ratio-21x9"  src="{{category.image.url}}" alt="{{category.alt_text}}">
+                    </a>
+                    <h5 class="font-weight-semi-bold m-0">{{category.name}}</h5>
                 </div>
-              </div>
-              
+            </div>
             
             {% endfor %}
             
@@ -141,8 +141,8 @@
                 <h2 class="section-title px-5" ><span class="px-2">Discover Our Wholesale Silk Sarees Collection</span></h2>
             </div>
             <div class="row ml-1 container-fluid">
-                <div class="col-lg-6 justify-content-center mt-4" id="reach-us-map">
-                    <iframe class="mw-100" data-aos="" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3606.7417642033724!2d83.00921207559787!3d25.312878827005015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2e1ed9ad1ce9%3A0x752abd6f8a7c826!2sSeth%20Sarees!5e0!3m2!1sen!2sin!4v1671276365611!5m2!1sen!2sin" width="600" height="485" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="col-lg-6 justify-content-center mt-4" style="overflow: hidden;text-align:center">
+                        <iframe class="mw-100" data-aos=""  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3606.7417642033724!2d83.00921207559787!3d25.312878827005015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2e1ed9ad1ce9%3A0x752abd6f8a7c826!2sSeth%20Sarees!5e0!3m2!1sen!2sin!4v1671276365611!5m2!1sen!2sin" width="600" height="485" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> 
                 </div>
                 <div class="col-lg-6 " style="overflow: hidden;">
                     <div class=" text-center m-lg-4 p-2  bg-secondary mb-2" data-aos="fade-down">
@@ -187,8 +187,8 @@
             <div class="col">
                 <div class="owl-carousel related-carousel">
                     {%for review in reviews%}
-                    <div class="card product-item border-0" >
-                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-2 " >
+                    <div class="card product-item border-0" style="">
+                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-2 " style="color:red;">
                             <span  class="btn btn-sm text-dark p-0"><i class="fas fa-star text-primary mr-1"></i></span>
                             <span  class="btn btn-sm text-dark p-0"><i class="fas fa-star text-primary mr-1"></i></span>
                             <span  class="btn btn-sm text-dark p-0"><i class="fas fa-star text-primary mr-1"></i></span>

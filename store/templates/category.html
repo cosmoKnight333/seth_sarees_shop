@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
- <style>
-    @media only screen and (min-width: 768px) {
-        .header-bg {
-          min-height: 394px;
-        }
-      }
-      @media only screen and (max-width: 767px) {
-        .header-bg {
-          min-height: 150px;
-        }
-      }
- </style>
+    <style>
+        @media only screen and (min-width: 768px) {
+            .header-bg {
+              min-height: 394px;
+            }
+          }
+          @media only screen and (max-width: 767px) {
+            .header-bg {
+              min-height: 150px;
+            }
+          }
+    </style>
     <!-- Page Header Start -->
     <div class="container-fluid bg-secondary "  >
         <div class="d-flex flex-column justify-content-center align-items-center  text-center header-bg" >
@@ -45,7 +45,7 @@
                         <div class="card-body border-left border-right border-top text-center  d-flex flex-column align-items-around justify-content-center pb-0" style="height:350px;">
                             <a href="{%url 'detail' category_id=product.category.id product_id=product.id  %}" target="_blank">
                                 <div class="product-img position-relative overflow-hidden bg-transparent  p-0">
-                                    <img class="img-fluid w-100 category-info-img" src="{{product.image.url}}" alt="" >
+                                    <img class="img-fluid w-100" src="{{product.image.url}}" alt="" style="height:260px; object-fit: contain; width:100%;">
                                 </div>
                             </a>
                             <h6 class="text-truncate mt-3">
@@ -81,10 +81,8 @@
     </div>
 </div>
 <!-- Shop End -->
-
+{%for product in products%}
 <script>
-    {%for product in products%}
-
     {%if product.in_wishlist%}
         document.querySelector(".wishlist-form-for-removing-{{product.id}}").style.display = "block";
         document.querySelector(".wishlist-form-{{product.id}}").style.display = "none";
@@ -92,10 +90,11 @@
         document.querySelector(".wishlist-form-for-removing-{{product.id}}").style.display = "none";
         document.querySelector(".wishlist-form-{{product.id}}").style.display = "block";
     {% endif %}
-
+</script>
 {%endfor%}
 {%for product in products%}
 
+<script>
     $(document).ready(function() {
         $('.wishlist-form-{{product.id}}').on('submit', function(e) {
             e.preventDefault(); // prevent form from submitting as usual
@@ -130,6 +129,8 @@
             });
         });
     });
+</script>
+<script>
     $(document).ready(function() {
         $('.wishlist-form-for-removing-{{product.id}}').on('submit', function(e) {
             e.preventDefault(); // prevent form from submitting as usual
@@ -153,10 +154,10 @@
             });
         });
     });
-    {%endfor%}
 
     </script>
 
+{%endfor%}
 
 {% endblock content%}
 

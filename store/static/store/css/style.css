@@ -9657,16 +9657,7 @@ a.text-dark:hover, a.text-dark:focus {
   height: 400px;
 }
 
-@media only screen and (min-width: 768px) {
-  .header-bg {
-    min-height: 394px;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .header-bg {
-    min-height: 150px;
-  }
-}
+
 .category-info-img{
   height:260px; object-fit: contain; width:100%;
 }

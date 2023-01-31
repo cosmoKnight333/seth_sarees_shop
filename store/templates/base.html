@@ -59,7 +59,31 @@
     <link href="{% static '/store/css/style.css' %}" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
-
+        #suggestions-list {
+            list-style: none; /* remove the bullets/dots */
+            position: absolute; /* position the list absolute to the parent element */
+            top: 100%; /* set the top position to 100% of the parent element */
+            left: 0; /* set the left position to 0 */
+            width: 100%; /* set the width to 100% of the parent element */
+            z-index: 2; /* set the z-index to 1 to make sure it appears on top */
+        }
+        .search-container {
+            position: relative; /* set the position to relative */
+        }
+        #suggestions-list li {
+            padding: 0.5em 1em; /* add padding to the list items */
+            border-bottom: 1px solid #f5f5f5; /* add a border-bottom to separate the items */
+            transition: background-color 0.2s ease-in-out; /* add a transition for the hover effect */
+            background:white;
+            color:black;
+        }
+        
+        #suggestions-list li:hover {
+            background-color: #f5f5f5; /* change the background color on hover */
+            cursor: pointer; /* change the cursor to a pointer */
+            color:#ba6a62;
+        }
+        
     </style>
 
 
@@ -106,7 +130,7 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control border-right-0" placeholder="Search Product" name="search" id="search" autocomplete="off">
                                             <div class="input-group-append">
-                                                <button name="search-submit-btn" class="btn search-submit-btn btn-outline-primary border rounded-0" type="submit" autocomplete="off" >
+                                                <button name="search-submit-btn" class="btn  btn-outline-primary  rounded-0" type="submit" autocomplete="off" style="border-color:#eeeeee;">
                                                     <i class="fa fa-search" ></i>
                                                 </button>
                                             </div>
@@ -133,7 +157,7 @@
     <div class="container-fluid mb-3 ">
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <a title="Discover Our Categories" class="btn category-header-desktop shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" >
+                <a title="Discover Our Categories" class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
                     <h6 class="m-0">Categories</h6>
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
@@ -141,7 +165,7 @@
                 
                 {% endblock index_nav %}
                 {% block category_nav %}{% endblock category_nav %}
-                    <div class="navbar-nav w-100 overflow-hidden category-list-desktop" >
+                    <div class="navbar-nav w-100 overflow-hidden " style="height: 410px ; " >
                         {% comment %} <div class="nav-item dropdown">
                             <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
@@ -195,10 +219,10 @@
                             
                             {%else%}
                             <div class="nav-item nav-link" style="text-decoration:none">
-                                <span class="text-dark" onmouseover=" this.style.color='black';" onmouseout="this.style.color='black';">
+                                <span style="color: black;" onmouseover="this.style.color='black';" onmouseout="this.style.color='black';">
                                 Hello! 
                                 </span>
-                                <a title="Account Information" data-toggle="modal" data-target="#changeInfoModal"  style="color: black; text-decoration: none;" onmouseover="this.style.color='#D19C97'; this.style.textDecoration='none';" onmouseout=" this.style.color='black'; this.style.textDecoration='none';">{{request.session.customer_first_name}} </a>
+                                <a title="Account Information" data-toggle="modal" data-target="#changeInfoModal" style="color: black; text-decoration: none;" onmouseover="this.style.color='#D19C97'; this.style.textDecoration='none';" onmouseout="this.style.color='black'; this.style.textDecoration='none';">{{request.session.customer_first_name}} </a>
                             </div>
                             <span>
                             <a href="/logout?next={{ request.get_full_path|urlencode }}" class="nav-item nav-link">Logout</a>
@@ -310,15 +334,15 @@
                                 </div>
                               <div class="control-group d-flex flex-row align-items-center justify-content-center">
                                 
-                                <select id="country-code-change-info" name="country-code" class=" my-1 mx-2 form-control  form-control-sm px-0 " >
-                                    <option value="+91" >+91 (India)</option>
-                                    <option value="+1"  >+1 (USA)</option>
-                                    <option value="+44" >+44 (UK)</option>
-                                    <option value="+33" >+33 (France)</option>
-                                    <option value="+81" >+81 (Japan)</option>
-                                    <option value="+55" >+55 (Brazil)</option>
-                                    <option value="+52" >+52 (Mexico)</option>
-                                    <option value="+86" >+86 (China)</option>
+                                <select id="country-code" name="country-code" class=" my-1 mx-2 form-control form-control-sm px-0" style="height:50px;width:150px;padding:0px">
+                                    <option value="+91" style="font-size: small;">+91 (India)</option>
+                                    <option value="+1" style="font-size: small;">+1 (USA)</option>
+                                    <option value="+44" style="font-size: small;">+44 (UK)</option>
+                                    <option value="+33" style="font-size: small;">+33 (France)</option>
+                                    <option value="+81" style="font-size: small;">+81 (Japan)</option>
+                                    <option value="+55" style="font-size: small;">+55 (Brazil)</option>
+                                    <option value="+52" style="font-size: small;">+52 (Mexico)</option>
+                                    <option value="+86" style="font-size: small;">+86 (China)</option>
                                   </select>
                                 <input type="text" class="form-control m-1 p-3" id="" name="phone_number" placeholder="Your WhatsApp Number"
                                     required="required" data-validation-required-message="Please enter your WhatsApp Number" />
@@ -376,7 +400,7 @@
                             </div>
                             {%endif%}
                               <input type="hidden" id="custId" name="next" value="{{ request.get_full_path }}">
-                              <div class="form-group mb-3 pb-2 border" >
+                              <div class="form-group mb-3 pb-2" style="border-bottom: 1px solid grey">
                                 <label for="password">Password:</label>
                                 <input type="password" class="form-control" name="password" placeholder="Password" required="required" data-validation-required-message="Please enter a password" />
                                 <small class="form-text text-muted text-center">Password is required to update your account information.</small>
@@ -399,15 +423,15 @@
                                 </div>
 
                                 <div class="control-group d-flex flex-row align-items-center justify-content-center">
-                                    <select id="" name="country-code" class="country-code m-1 form-control form-control-sm p-0" >
-                                        <option value="+91" >+91 (India)</option>
-                                        <option value="+1"  >+1 (USA)</option>
-                                        <option value="+44" >+44 (UK)</option>
-                                        <option value="+33" >+33 (France)</option>
-                                        <option value="+81" >+81 (Japan)</option>
-                                        <option value="+55" >+55 (Brazil)</option>
-                                        <option value="+52" >+52 (Mexico)</option>
-                                        <option value="+86" >+86 (China)</option>
+                                    <select id="country-code" name="country-code" class=" m-1 form-control form-control-sm p-0" style="height:50px;width:150px;padding:0px">
+                                        <option value="+91" style="font-size: small;">+91 (India)</option>
+                                        <option value="+1" style="font-size: small;">+1 (USA)</option>
+                                        <option value="+44" style="font-size: small;">+44 (UK)</option>
+                                        <option value="+33" style="font-size: small;">+33 (France)</option>
+                                        <option value="+81" style="font-size: small;">+81 (Japan)</option>
+                                        <option value="+55" style="font-size: small;">+55 (Brazil)</option>
+                                        <option value="+52" style="font-size: small;">+52 (Mexico)</option>
+                                        <option value="+86" style="font-size: small;">+86 (China)</option>
                                       </select>
                                     <input type="text" class="form-control m-1 p-3" id="" name="phone_number" placeholder="Your WhatsApp Number"
                                         required="required" data-validation-required-message="Please enter your WhatsApp Number" value="{{request.session.customer_phone_number}}" />
@@ -475,7 +499,7 @@
                     <div class="d-flex mb-2">
                       <i class="fa m-0 pt-2 fa-map-marker-alt text-primary mr-3"></i>
                       <div>
-                        <a title="View on Google Maps" class="link-black" href="https://www.google.com/search?q=seth%20sarees&oq=seth&aqs=chrome.0.69i59j69i57j69i59j69i60j69i61l2j69i60.1882j0j4&sourceid=chrome&ie=UTF-8&tbs=lf:1,lf_ui:10&tbm=lcl&sxsrf=ALiCzsaSynD1unvd0ebaW9NJ0Fx-3SjwXA:1671827345404&rflfq=1&num=10&rldimm=527673046138865702&lqi=CgtzZXRoIHNhcmVlc0iz8qLwsq6AgAhaHRAAEAEYABgBIgtzZXRoIHNhcmVlcyoGCAIQABABkgEXZGVzaWduZXJfY2xvdGhpbmdfc3RvcmU&phdesc=J3chXqvknqQ&ved=2ahUKEwjjtbGYypD8AhVH03MBHdmAB1gQvS56BAgYEAE&sa=X&rlst=f#rlfi=hd:;si:527673046138865702,l,CgtzZXRoIHNhcmVlc0iz8qLwsq6AgAhaHRAAEAEYABgBIgtzZXRoIHNhcmVlcyoGCAIQABABkgEXZGVzaWduZXJfY2xvdGhpbmdfc3RvcmU,y,J3chXqvknqQ;mv:[[25.6578831,83.0200176],[25.2926608,82.8717667]];tbs:lrf:!1m4!1u3!2m2!3m1!1e1!2m1!1e3!3sIAE,lf:1,lf_ui:10" target="_blank" >
+                        <a title="View on Google Maps" href="https://www.google.com/search?q=seth%20sarees&oq=seth&aqs=chrome.0.69i59j69i57j69i59j69i60j69i61l2j69i60.1882j0j4&sourceid=chrome&ie=UTF-8&tbs=lf:1,lf_ui:10&tbm=lcl&sxsrf=ALiCzsaSynD1unvd0ebaW9NJ0Fx-3SjwXA:1671827345404&rflfq=1&num=10&rldimm=527673046138865702&lqi=CgtzZXRoIHNhcmVlc0iz8qLwsq6AgAhaHRAAEAEYABgBIgtzZXRoIHNhcmVlcyoGCAIQABABkgEXZGVzaWduZXJfY2xvdGhpbmdfc3RvcmU&phdesc=J3chXqvknqQ&ved=2ahUKEwjjtbGYypD8AhVH03MBHdmAB1gQvS56BAgYEAE&sa=X&rlst=f#rlfi=hd:;si:527673046138865702,l,CgtzZXRoIHNhcmVlc0iz8qLwsq6AgAhaHRAAEAEYABgBIgtzZXRoIHNhcmVlcyoGCAIQABABkgEXZGVzaWduZXJfY2xvdGhpbmdfc3RvcmU,y,J3chXqvknqQ;mv:[[25.6578831,83.0200176],[25.2926608,82.8717667]];tbs:lrf:!1m4!1u3!2m2!3m1!1e1!2m1!1e3!3sIAE,lf:1,lf_ui:10" target="_blank" style="color:black;">
                           <span itemprop="streetAddress">{{streetAddress}},</span>
                           <span itemprop="addressLocality">{{addressLocality}}</span> 
                           <span itemprop="addressRegion"> {{addressRegion}}</span> 
@@ -492,7 +516,7 @@
                     <div class="d-flex mb-0">
                       <i class="fa fa-phone-alt text-primary mr-3"></i>
                       <div>
-                        <a  title="Call Us" itemprop="telephone" href="tel:+{{phone_no}}" class="link-black"> +{{phone_no}}</a>
+                        <a  title="Call Us" itemprop="telephone" href="tel:+{{phone_no}}" style="color:black;"> +{{phone_no}}</a>
                       </div>
                     </div>
                     <meta itemprop="description" content="Seth Sarees is a business store website for banarasi sarees located in Varanasi.">
@@ -588,31 +612,37 @@
     <script>
         AOS.init({});
     </script>
-    <script>
 
     {% if request.GET.signup_error_msg  %}
+    <script>
         $(document).ready(function() {
             $('#signupModal').modal('show');
         });
+    </script>
     {% endif %}
 
     {% if request.GET.is_in_wishlist  %}
+    <script>
         $(document).ready(function() {
             $('#itemAlreadyInWishlistModal').modal('show');
         });
+    </script>
     {% endif %}
 
     {% if request.GET.error_msg  %}
+    <script>
         $(document).ready(function() {
             $('#loginModal').modal('show');
         });
+    </script>
     {% endif %}
 
     {% if request.GET.change_info_error_msg  %}
+    <script>
         $(document).ready(function() {
             $('#changeInfoModal').modal('show');
         });
+    </script>
     {% endif %}
-</script>
 
 </body>
