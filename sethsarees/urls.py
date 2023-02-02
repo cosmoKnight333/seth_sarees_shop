@@ -47,9 +47,10 @@ sitemaps={
     'contact':ContactSitemap,
     'privacy_policy':PrivacyPolicySitemap,
     'support':SupportSitemap,
-    'detail':ProductSitemap
-    
+    'detail':ProductSitemap   
 }
+handler404 = 'store.views.error.error_400'
+handler500 = 'store.views.error.error_500'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('store/',include('store.urls')),
@@ -77,6 +78,5 @@ urlpatterns = [
     path('logout',logout),
     path('store/category/<int:category_id>/sarees', show_category, name='category'),
     path('store/category/<int:category_id>/sarees/<int:product_id>/detail', Detail.as_view(),name="detail"),
-
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

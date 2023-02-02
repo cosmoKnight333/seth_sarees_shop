@@ -8,7 +8,6 @@ from store.models.customer import Customer
 from store.models.review import Review
 from store.models.wishlist import Wishlist
 from .data import initial_data
-from django.core.mail import send_mail
 
 
 
@@ -34,6 +33,7 @@ def index(request):
     #     ['devkumarseth9@gmail.com'],  # list of recipient email addresses
     #     fail_silently=False,
     # )
+    
     data=initial_data
     customer_id=request.session.get('customer')
     wishlist_len=0
@@ -54,9 +54,9 @@ def index(request):
     data['categories']=categories
     data['corousels']=corousels
     data['reviews']=reviews
-    data['title']="Seth Sarees- Finest Silk and Banarasi Sarees Wholesale & Retail Store"
-    data['meta_description']='Discover a wide range of luxurious and unique Silk and Banarasi Sarees in Varanasi at wholesale and retail prices. Visit Seth Sarees or shop online now.'
-    data['meta_tags']='Seth Sarees,Banarasi Sarees, Silk Sarees, Varanasi, Wholesale, Retail, Santosh Seth'
+    data['title']="Seth Sarees-Finest Silk and Banarasi Sarees Wholesale & Retail Store"
+    data['meta_description']='Discover a wide range of luxurious and unique Silk and Banarasi Sarees in Chowk Varanasi at wholesale and retail prices. Visit Seth Sarees or shop online now.'
+    data['meta_tags']='Seth Sarees,Banarasi , Silk Sarees, Varanasi, Wholesale, Retail, Santosh ,Chowk'
     return render(request,'index.html',data)   
 
 def logout(request):

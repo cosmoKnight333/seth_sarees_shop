@@ -3,8 +3,7 @@
     {% load static %}
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>{{title}}</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>{%if title%}{{title}}{%else%}Seth Sarees{%endif%}</title>
         <!-- OG Tag -->
         <meta property="og:type" content="website">
         <meta property="og:url" content="https://cosmoknight.pythonanywhere.com/">
@@ -20,21 +19,16 @@
         <meta property="og:longitude" content="83.01144118043115">        
         <!-- OG Tag END -->
     <!-- Cannonical tags-->
-    <link rel="alternate" hreflang="en" href="/support"/>
+    <link rel="alternate" hreflang="en" href="/support">
     {% if request.get_full_path %}
     <link rel="canonical" href="{{ request.build_absolute_uri }}"/>
     {% endif %}
     <!-- Cannonical Tag End-->
 
 
-    <title>
-        {%if title%}
-        {{title}}
-        {%else%}
-        Seth Sarees
-        {%endif%}
-    </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+
     <meta name="description" content="{{meta_description}}">
     <meta name="keywords" content="{{meta_tags}}">
    
@@ -121,7 +115,7 @@
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a title="Seth Sarees" href='/' class="text-decoration-none">
-                    <h1 class="mb-4 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Seth</span>Sarees</h1>
+                    <h1 class="my-2 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Seth</span>Sarees</h1>
                 </a>
             </div>
             <div class="col-lg-6 col-7 text-left pr-0 mr-0">
@@ -492,7 +486,7 @@
             <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5" itemscope itemtype="http://schema.org/LocalBusiness">
                 
                 <a href="/" class="text-decoration-none">
-                    <h1 itemprop="name" class="mb-4 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border border-white px-3 mr-1">Seth</span>Sarees</h1>
+                    <h2 itemprop="name" class="mb-4 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border border-white px-3 mr-1">Seth</span>Sarees</h2>
                 </a>
                 <p>Retailer and wholeseller in all kinds of Banarasi and Silk Sarees.</p>
                 <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
@@ -516,7 +510,7 @@
                     <div class="d-flex mb-0">
                       <i class="fa fa-phone-alt text-primary mr-3"></i>
                       <div>
-                        <a  title="Call Us" itemprop="telephone" href="tel:+{{phone_no}}" style="color:black;"> +{{phone_no}}</a>
+                        <a  title="Telephone" itemprop="telephone" href="tel:+{{phone_no}}" style="color:black;"> +{{phone_no}}</a>
                       </div>
                     </div>
                     <meta itemprop="description" content="Seth Sarees is a business store website for banarasi sarees located in Varanasi.">
@@ -612,7 +606,36 @@
     <script>
         AOS.init({});
     </script>
+    <script>
+    $(document).on('click', '#suggestions-list li', function(){
+        $("#search").val($(this).text());
+        $(".searchForm").submit();
+        });
+    $(document).ready(function() {
+        $("#search").on("keyup", function() {
+            var searchTerm = $(this).val();
+            // Make an AJAX call to the server
+            $.ajax({
+                type: "GET",
+                url: "/search-suggestions",
+                data: {search: searchTerm},
+                success: function(response) {
+                    var suggestionsList = $("#suggestions-list");
+                    suggestionsList.empty();
+                    // Show the list of suggestions
+                    response.suggestions.forEach(function(suggestion) {
+                        suggestionsList.append("<li>" + suggestion + "</li>");
+                    });
+                    $("#suggestions-list li").click(function(){
+                        $("#search").val($(this).text());
+                        $(".searchForm").submit();
+                    });
+                }
+            });
+        });
+    });
 
+    </script>
     {% if request.GET.signup_error_msg  %}
     <script>
         $(document).ready(function() {
@@ -644,5 +667,18 @@
         });
     </script>
     {% endif %}
-
+    <script>
+        function lazyLoad() {
+          const images = document.querySelectorAll('img[data-src]');
+          images.forEach(img => {
+            const rect = img.getBoundingClientRect();
+            if (rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth)) {
+              img.src = img.getAttribute('data-src');
+              img.removeAttribute('data-src');
+            }
+          });
+        }
+      
+        document.addEventListener("scroll", lazyLoad);
+      </script>
 </body>
