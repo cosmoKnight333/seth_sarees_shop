@@ -27,8 +27,8 @@
                     <tbody class="align-middle">
                         {%for entry in wishlist%}
                         <tr>
-                            <td class=""><a href="/detail?product={{entry.product.id}}"><img src="{{entry.product.image.url}}" alt="" style="width: 200px;border-radius: 10%;"  class="m-2"></a> </td>
-                            <td class=" text-center " style=" vertical-align: middle;"><div class=""> <a href="/detail?product={{entry.product.id}}"><p> {{entry.product.name}}</p></a></div></td>
+                            <td class=""><a href="{%url 'detail' category_id=entry.product.category.id product_id=entry.product.id  %}"><img src="{{entry.product.image.url}}" alt="" style="width: 200px;border-radius: 10%;"  class="m-2"></a> </td>
+                            <td class=" text-center " style=" vertical-align: middle;"><div class=""> <a href="{%url 'detail' category_id=entry.product.category.id product_id=entry.product.id  %}"><p> {{entry.product.name}}</p></a></div></td>
                         </tr>
                        
                         {%endfor%}

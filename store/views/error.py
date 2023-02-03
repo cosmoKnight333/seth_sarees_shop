@@ -1,10 +1,11 @@
 from django.shortcuts import render
+from .data import initial_data
 
 def error_400(request, exception):
-    return render(request, 'error404.html', status=400)
+    data= initial_data
+    return render(request, 'error404.html', data,status=400)
 
-def error_404(request, exception):
-    return render(request, 'error404.html', status=404)
 
 def error_500(request):
-    return render(request, 'error404.html', status=500)
+    data=initial_data
+    return render(request, 'error500.html', data,status=500)

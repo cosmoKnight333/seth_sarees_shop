@@ -39,6 +39,7 @@ from store.views.addtowishlist import removeitem
 from store.views.wishlist import show_wishlist
 from store.views.show_sent_list import show_sent_list
 from store.views.take_to_change_password import Take_To_Change_Password
+from django.conf.urls import handler404
 
 sitemaps={
     '':IndexSitemap,
@@ -47,11 +48,11 @@ sitemaps={
     'contact':ContactSitemap,
     'privacy_policy':PrivacyPolicySitemap,
     'support':SupportSitemap,
-    'detail':ProductSitemap   
+    'detail':ProductSitemap
 }
-handler404 = 'store.views.error.error_400'
-handler500 = 'store.views.error.error_500'
+
 urlpatterns = [
+    path('',index,name='index'),
     path('admin/', admin.site.urls),
     path('store/',include('store.urls')),
     path('sitemap.xml',sitemap,{'sitemaps':sitemaps}),
@@ -61,7 +62,7 @@ urlpatterns = [
     path('wishlist',show_wishlist),
     path('add-to-wishlist',addtowishlist),
     path('about',show_about,name='about'),
-    path('',index,name='index'),
+
     path('privacy-policy',show_privacy_policy,name='privacy_policy'),
     path('support',show_support,name='support'),
     path('about',show_about,name='about'),

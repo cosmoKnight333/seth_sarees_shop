@@ -34,7 +34,7 @@
                             {%for entry in wishlist%}
                             <tr>
                                 <td class=""><a href="{%url 'detail' category_id=entry.product.category.id product_id=entry.product.id  %}"><img src="{{entry.product.image.url}}" alt="" style="width: 100px;border-radius: 10%;"  class="m-2"></a> </td>
-                                <td class="text-center pt-5" style="vertical-align: middle;"><a href="/detail?product={{entry.product.id}}"> <a href="{%url 'detail' category_id=entry.product.category.id product_id=entry.product.id  %}"><p> {{entry.product.name}}</p></a></td>
+                                <td class="text-center pt-5" style="vertical-align: middle;"><a href="{%url 'detail' category_id=entry.product.category.id product_id=entry.product.id  %}"> <a href="{%url 'detail' category_id=entry.product.category.id product_id=entry.product.id  %}"><p> {{entry.product.name}}</p></a></td>
                                 <td class="align-middle">
                                     <form action="/remove-item" method="POST" class=remove-item-form-{{entry.id}}>
                                     {%csrf_token%}
