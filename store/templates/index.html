@@ -8,13 +8,13 @@
 {% block show_corousel %}
 <div id="header-carousel" class="carousel slide" data-ride="carousel" >
     <div class="carousel-inner">
-        
+
         <div class="carousel-item active" style="height: 410px;">
-            <img class="img-fluid"   src="{% static './store/img/carousel-1.jpg' %}" alt="Image">
+            <img class="img-fluid"   src="{% static './store/img/banner_5.jpeg' %}" alt="Image">
             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                 <div class="p-3" style="max-width: 700px;">
-                    <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
-                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable Dress</h3>
+                    <h4 class="text-light text-uppercase font-weight-medium mb-3">Experience the elegance of Silk Sarees</h4>
+                    <h3 class=" text-white font-weight-semi-bold mb-4">Weaving traditions since 1993</h3>
                     <a href="/store" class="btn btn-light py-2 px-3">Start Wishlisting</a>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     <h4 class="text-light text-uppercase font-weight-medium mb-3">{{corousel.subheading}}</h4>
                     <h3 class="display-4 text-white font-weight-semi-bold mb-4">{{corousel.heading}}</h3>
                     <a href="tel:{{phone_no}}" class="btn btn-light py-2 px-3">Call-Us <span class="pl-1"><i class="fa fa-phone" ></i></span></a>
-                    
+
 
                 </div>
             </div>
@@ -125,30 +125,30 @@
     <!-- Featured End -->
 
 
-    
+
 <!-- Categories Start -->
 <div class="container-fluid pt-5" >
     <div class="text-center mb-4">
         <h2 class="section-title px-5"><span class="px-2">Explore our Collection of Sarees by Category</span></h2>
     </div>
-    
+
     <div class="row px-xl-5 pb-3">
-        
+
         {% for category in categories|slice:":9" %}
         <div class="col-lg-4 col-md-6 pb-1" data-aos="">
             <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px; height: 400px">
                 <p class="text-right">10 Products</p>
                 {% comment %} no of products with given category {% endcomment %}
-                
+
                 <a href="{% url 'category' category.id %}" class="cat-img position-relative overflow-hidden mb-3">
                     <img class="img-fluid ratio ratio-21x9"  src="{{category.image.url}}" alt="{{category.alt_text}}">
                 </a>
                 <a href="{% url 'category' category.id %}"><h5 class="font-weight-semi-bold m-0">{{category.name}}</h5></a>
             </div>
         </div>
-        
+
         {% endfor %}
-        
+
     </div>
 </div>
 <!-- Categories End -->
@@ -183,7 +183,7 @@ background-position: center; /* center the image */
         </div>
         <div class="row ml-1 container-fluid">
             <div class="col-lg-6 justify-content-center mt-4" style="overflow: hidden;text-align:center">
-                    <iframe class="mw-100" data-aos=""  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3606.7417642033724!2d83.00921207559787!3d25.312878827005015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2e1ed9ad1ce9%3A0x752abd6f8a7c826!2sSeth%20Sarees!5e0!3m2!1sen!2sin!4v1671276365611!5m2!1sen!2sin" width="600" height="485" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> 
+                    <iframe class="mw-100" data-aos=""  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3606.7417642033724!2d83.00921207559787!3d25.312878827005015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2e1ed9ad1ce9%3A0x752abd6f8a7c826!2sSeth%20Sarees!5e0!3m2!1sen!2sin!4v1671276365611!5m2!1sen!2sin" width="600" height="485" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="col-lg-6 " style="overflow: hidden;">
                 <div class=" text-center m-lg-4 p-2  bg-secondary mb-2" data-aos="fade-down">
@@ -198,13 +198,13 @@ background-position: center; /* center the image */
                     <h4 class=" p-1 mb-1"><span class=" px-2">3. Select Your Favourite Saree</span></h4>
                     <p class="text-justify" >From our extensive selection, kindly choose your preferred option among our sumptuous silk suits, silk sarees, and genuine handloom sarees. You will be left astounded by the allure of our captivating saree collection upon donning it.</p>
                 </div>
-                
+
             </div>
 
         </div>
     </div>
     <!-- Reach us End-->
-    
+
     <!-- Review Start -->
 
     <div class="container-fluid bg-secondary  p-5 my-4" >
@@ -212,18 +212,18 @@ background-position: center; /* center the image */
             <div class="col-lg-6  ">
                 <div class="text-center mb-2 pb-2">
                     <h2 class="section-title px-5 "><span class="bg-secondary px-2 text-capitalize" >Hear from our satisfied customers</span> </h2>
-                </div>  
+                </div>
             </div>
-           
+
         </div>
         <div class="text-center mb-2">
             <a href="https://g.co/kgs/i5QDD2"  class="btn btn-primary "> <span class="pl-1"><i class="fab fa-google mr-1" ></i></span>Review Us</a>
-        
-        </div> 
+
+        </div>
         <div>
        <!-- Products Start -->
 <div class="container-fluid py-5">
-    
+
     <div class="row px-xl-5">
         <div class="col">
             <div class="owl-carousel related-carousel">
@@ -249,7 +249,7 @@ background-position: center; /* center the image */
                     </div>
                 </div>
                 {%endfor%}
-                
+
             </div>
         </div>
     </div>
@@ -259,7 +259,7 @@ background-position: center; /* center the image */
         </div>
     </div>
     <!-- Review End -->
-    
+
     <div class="container-fluid p-3">
         <div class="text-center mb-2 mt-5 pb-2">
             <h2 class="section-title px-5 text-capitalize "><span class="px-2">Discover the soul of India in the mesmerizing city of Varanasi</span> </h2>

@@ -25,31 +25,37 @@ def search(request):
     query = request.GET['search']
     categories = Category.get_all_categories()
 
-    # find the closest string matches for the query in the 'name', 'description', 'category__name' and 'category__description' fields
+    # find the closest string matches for the query in the 'name' field of products
     product_names = Product.objects.values_list('name', flat=True)
-    product_name_matches = process.extractBests(query, product_names, score_cutoff=70, limit=12)
+    product_name_matches = process.extractBests(query, product_names, score_cutoff=85, limit=10)
     product_names = [match[0] for match in product_name_matches]
 
-    
+    # find the closest string matches for the query in the 'name' field of categories
     category_names = Category.objects.values_list('name', flat=True)
-    category_name_matches = process.extractBests(query, category_names, score_cutoff=90, limit=12)    
+    category_name_matches = process.extractBests(query, category_names, score_cutoff=85, limit=10)
     category_names = [match[0] for match in category_name_matches]
 
-    
-    
-    products = Product.objects.filter(
-        Q(name__in=product_names) |
-        Q(category__name__in=category_names) 
-    )
+    products = Product.objects.filter(name__in=product_names)
+    categories = Category.objects.filter(name__in=category_names)
 
-    data['query'] = "Search results for: " + query
-    data['categories'] = categories
+    # calculate the number of similar words between the query and the name of each product and category
+    for product in products:
+        product.similarity_score = len(set(product.name.lower().split()) & set(query.lower().split()))
+    for category in categories:
+        category.similarity_score = len(set(category.name.lower().split()) & set(query.lower().split()))
+
+    # sort the products and categories based on the number of similar words in descending order
+    products = sorted(products, key=lambda p: p.similarity_score, reverse=True)
+    categories = sorted(categories, key=lambda c: c.similarity_score, reverse=True)
+
+    data['query'] =  query
+    data['categories'] = Category.get_all_categories()
     data['products'] = products
     data['meta_description']='Find the perfect saree from our extensive collection of traditional Banarasi sarees at our store in the historic chauk area of Varanasi. Seth Sarees collection features a wide range of luxurious and unique sarees to suit all tastes and budgets including traditional hand-woven silk and more modern printed styles. Our showroom is elegantly adorned with an array of stunning options and our team of knowledgeable and friendly staff are always on hand to assist customers in finding the perfect saree for any occasion. Follow us on social media or sign up  special discounts and promotions. Visit our store today!'
     data['meta_tags']='Seth Sarees,Search, results, sarees, Banarasi, Varanasi, traditional, luxurious, unique, hand-woven silk, modern printed styles, wholesaler, retailer, showroom, knowledgeable staff, excellent customer service, social media, email list, special discounts, promotions'
     data['title']="Search Sarees - Results for '"+ query+"'"
     for product in products:
-            product.in_wishlist = len(Wishlist.objects.filter(customer=customer_id, product=product)) > 0
+        product.in_wishlist = len(Wishlist.objects.filter(customer=customer_id, product=product)) > 0
 
     return render(request, 'search.html', data)
 
